@@ -1,22 +1,25 @@
-var itrTrained = 0
+{let boardId = "r3Board", state, postWinnerElement = "r3Res"
 
 addEventListener("load", () => {
-  r3StartOnlineGame(boardId = "r3Board")
+  state = r3StartOnlineGame(boardId)
 
   document.getElementById("r3NewGame").addEventListener("click", function () {
-    r3StartOnlineGame(boardId = "r3Board")
+    state = r3StartOnlineGame(boardId)
   })
 
-  document.getElementById("r3RandomMove").addEventListener("click", r3RandomMove)
+  document.getElementById("r3RandomMove").addEventListener("click", function () {
+      r3RandomMove(state, boardId, postWinnerElement)
+  })
 
-  document.getElementById('r3Board').addEventListener("click", function(){
-    var board = getR3BoardState(), x = event.clientX, y = event.clientY
+  document.getElementById(boardId).addEventListener("click", function(){
+    var board = state.board, x = event.clientX, y = event.clientY
     var slot =
       {
-        column: columnClicked('r3Board',x,y, board.length, board[0].length),
-        row: rowClicked('r3Board',x,y, board.length, board[0].length)
+        column: columnClicked(boardId,x,y, board.length, board[0].length),
+        row: rowClicked(boardId,x,y, board.length, board[0].length)
       }
-    r3OnlineGame(slot, boardId = "r3Board")
+    r3OnlineGame(state, slot, boardId, postWinnerElement)
     }
   )
 })
+}

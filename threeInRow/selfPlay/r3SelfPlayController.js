@@ -1,13 +1,17 @@
-var itrTrained = 0
+{let selfItrTrained = 0, state, boardId = "r3SelfBoard", postWinnerElement = "r3SelfRes"
 
 addEventListener("load", () => {
-  r3StartOnlineGame(boardId = "r3SelfBoard")
+  state = r3StartOnlineGame(boardId)
 
   document.getElementById("r3SelfNewGame").addEventListener("click", function () {
-    r3StartOnlineGame(boardId = "r3SelfBoard")
+    state = r3StartOnlineGame(boardId)
   })
-  document.getElementById("r3SelfRandomMove").addEventListener("click", r3RandomMove)
-  document.getElementById("r3SelfAiMove").addEventListener("click", r3MakeAiMove)
+  document.getElementById("r3SelfRandomMove").addEventListener("click", function () {
+    r3RandomMove(state, boardId, postWinnerElement)
+  })
+  document.getElementById("r3SelfAiMove").addEventListener("click",  function () {
+    r3MakeAiMove(state, boardId, postWinnerElement)
+  })
 
   document.getElementById("r3SelfTest").addEventListener("click", function() {
     iterations = 1000
@@ -18,19 +22,20 @@ addEventListener("load", () => {
 
   document.getElementById("r3SelfTrain").addEventListener("click", function() {
     var newIterations = 5000
-    itrTrained += newIterations
+    selfItrTrained += newIterations
     r3SelfPlay(newIterations)
-    postReplace(element = "r3SelfAi","Trained on for " + itrTrained + " iterations in total")
+    postReplace(element = "r3SelfAi","Trained on for " + selfItrTrained + " iterations in total")
   })
 
-  document.getElementById('r3SelfBoard').addEventListener("click", function(){
-    var board = getR3BoardState(), x = event.clientX, y = event.clientY
+  document.getElementById(boardId).addEventListener("click", function(){
+    var board = state.board, x = event.clientX, y = event.clientY
     var slot =
       {
-        column: columnClicked('r3SelfBoard',x,y, board.length, board[0].length),
-        row: rowClicked('r3SelfBoard',x,y, board.length, board[0].length)
+        column: columnClicked(boardId,x,y, board.length, board[0].length),
+        row: rowClicked(boardId,x,y, board.length, board[0].length)
       }
-    r3OnlineGame(slot, boardId = "r3SelfBoard")
+    r3OnlineGame(state, slot, boardId, postWinnerElement)
     }
   )
 })
+}

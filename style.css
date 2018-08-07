@@ -17,13 +17,13 @@
 
 .board{
   margin: 2.5% 0%;
-  width:50%;
-  height: 50%; //TODO doesnt work?
+  width: 30vw;
+  height: 30vh;
 }
 
 .h1{
   font-family: 'Trocchi', serif;
-  font-size: 5vw;
+  font-size: 3.5vw;
   font-weight: bold;
   line-height: 10%;
   margin: 5% 4%;
@@ -32,12 +32,13 @@
 .text{
   font-family: 'Trocchi', serif;
   font-weight: bold;
+  font-size: 1.25vw;
 }
 
 .div{
-  border: 2vw solid #0ff;
+  border: 1.5vw solid #0ff;
   margin: 10%;
-  padding: 0% 2.5%;
+  padding: 0% 1%;
   text-align: center;
   border-radius: 15%
 }

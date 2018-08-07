@@ -1,92 +1,58 @@
-var r3BoardState, r3PlayerTurn, r3Winner, r3LastMove, r3AlreadyWon, gameLog
-
 function r3NewGame() {
-  var newBoard = createBoard(numberOfColumns = 3, numberOfRows = 3)
-  setR3BoardState(newBoard)
-  r3PlayerTurn = 1
-  r3Winner = 0
-  r3AlreadyWon = false
-  gameLog = []
+  return {
+             alreadyWon : false,
+             winner : 0,
+             board : createBoard(numberOfColumns = 3, numberOfRows = 3),
+             nextTurn : 1, // current player
+             lastMove : null,
+             log : []
+           }
 }
 
 function r3StartOnlineGame(boardId) {
-  r3NewGame()
-  r3DrawBoard(getR3BoardState(),boardId)
+  let state = r3NewGame()
+  r3DrawBoard(state.board,boardId)
+  return state
 }
 
-function r3OnlineGame(slot,boardId) {
+function r3OnlineGame(state, slot, boardId, postWinnerElement) {
   /* If the slot is empty, make a move */
-  if(isPositionEmpty(getR3BoardState(), slot.column, slot.row)){
-    r3Game(slot)
-    if( getR3Winner() != 0 && !r3AlreadyWon){
-      r3AlreadyWon = true
-      r3PostWinner(r3Winner)
+  if(isPositionEmpty(state.board, slot.column, slot.row)){
+    r3Game(state, slot)
+    if( state.winner != 0 && !state.alreadyWon){
+      state.alreadyWon = true
+      r3PostWinner(postWinnerElement, state.winner)
     }
   }
-  r3DrawBoard(getR3BoardState(), boardId)
+  r3DrawBoard(state.board, boardId)
 }
 
-function r3Game(slot) {
-  setR3LastMove(slot)
-  setR3BoardState( updateBoard( getR3BoardState(), slot.column, slot.row, r3PlayerTurn))
-  updateGameLog()
+function r3Game(state, slot) {
+  state.lastMove = slot
+  state.board = updateBoard( state.board, slot.column, slot.row, state.nextTurn)
+  state.log.push({
+    player: state.nextTurn,
+    column: state.lastMove.column,
+    row: state.lastMove.row
+  })
 
-  if (r3Winner == 0 &&
-    checkForWin(getR3BoardState(), r3PlayerTurn, numNeeded = 3)) {
-    r3Winner = r3PlayerTurn
-  }else if ( r3Winner == 0 && isBoardFull(getR3BoardState())) {
-    r3Winner = 2
+  if (state.winner == 0 &&
+    checkForWin(state.board, state.nextTurn, numNeeded = 3)) {
+    state.winner = state.nextTurn
+  }else if ( state.winner == 0 && isBoardFull(state.board)) {
+    state.winner = 2
   }
 
-  r3PlayerTurn = (r3PlayerTurn==1)? -1 : 1
-  return r3Winner
+  state.nextTurn = (state.nextTurn==1)? -1 : 1
+  return state.winner
 }
 
-function r3RandomMove() { // // TODO:  ugly solution
-  if (isBoardFull(getR3BoardState())) {
-    return
-  }
-  r3OnlineGame(randSlot(getR3BoardState()))
+function r3RandomMove(state, boardId, postWinnerElement) { // TODO:  ugly solution
+  if (isBoardFull(state.board)) { return }
+  r3OnlineGame(state, randSlot(state.board),boardId, postWinnerElement)
 }
 
-function r3MakeAiMove() {
-  if (isBoardFull(getR3BoardState())) {
-    return
-  }
-   r3OnlineGame(r3CreateALastMove(getR3BoardState(),getr3PlayerTurn()))
-}
-
-function setR3BoardState(newBoard) {
-  r3BoardState = newBoard
-}
-
-function setR3LastMove(slot) {
-  r3LastMove = slot
-}
-function getR3BoardState() {
-  return r3BoardState
-}
-
-function getR3Winner() {
-  return r3Winner
-}
-
-function getR3LastMove() {
-  return r3LastMove
-}
-
-function getr3PlayerTurn() {
-  return r3PlayerTurn
-}
-function updateGameLog() { // TODO refactor in
-  var currentTurn = {
-    player: getr3PlayerTurn(),
-    column: getR3LastMove().column,
-    row: getR3LastMove().row
-  }
-  gameLog.push(currentTurn)
-}
-
-function getGameLog() {
-  return gameLog
+function r3MakeAiMove(state, boardId, postWinnerElement) {
+  if (isBoardFull(state.board)) { return }
+  r3OnlineGame(state, r3AiMove(state),boardId, postWinnerElement)
 }

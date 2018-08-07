@@ -35,22 +35,20 @@ function r3RandDataSet(size) {
 	for (var i = 0; i < size; i++) {
 		// Generate a random game
 		do{
-			r3NewGame()
-			while( r3Game(randSlot(getR3BoardState())) == 0){
-				// randomSlot = randSlot(getR3BoardState())
-				// res = r3Game(randomSlot)
+			state = r3NewGame()
+			while( r3Game(state, randSlot(state.board)) == 0){
 			}
-		} while ( getR3Winner() == 2)
+		} while ( state.winner == 2)
 		// Retrieve the winning move
-		lastMove = getR3LastMove()
+		lastMove = state.lastMove
 
 
 		// Get the board without the winning move
-		 almostWonBoard = updateBoard(getR3BoardState(), column = lastMove.column,
+		 almostWonBoard = updateBoard(state.board, column = lastMove.column,
 		 			row = lastMove.row, value=0)
 
 		// Switching the board for the ai
-		almostWonBoard = convertBoardForAI(almostWonBoard, getR3Winner)
+		almostWonBoard = convertBoardForAI(almostWonBoard, state.winner)
 
 		// Create the correct answer
 		correctAnswer = createBoard(almostWonBoard.length, almostWonBoard[0].length)
@@ -58,7 +56,7 @@ function r3RandDataSet(size) {
 
 		// Turn into array
 		correctAnswer =  boardToArray(correctAnswer);
-		almostWonBoard = boardToArray(getR3BoardState());
+		almostWonBoard = boardToArray(state.board);
 
 		// Store in the right format
 		datapoint = {
@@ -73,20 +71,20 @@ function r3RandDataSet(size) {
 	return dataset
 }
 
-function r3CreateALastMove(board, player) {
-	board = convertBoardForAI(board, player)
+function r3AiMove(state) {
+	board = convertBoardForAI(state.board, state.nextTurn)
 	var output = myR3Network.activate(boardToArray(board))
 	var aiOutput = arrayToBoard(board, output)
-	return findR3AiMove(board, aiOutput)
+	return findR3AiMove(state, board, aiOutput)
 }
 
 
-function findR3AiMove(board, aiOutput) {
+function findR3AiMove(state, board, aiOutput) {
 	var slotChosen, isLarger, isEmpty, largestOutputYet = 0
 	for (var col = 0; col < aiOutput.length; col++) {
 		for (var row = 0; row < aiOutput[0].length; row++) {
 			isLarger = aiOutput[col][row] > largestOutputYet
-			isEmpty = isPositionEmpty(getR3BoardState(), col, row)
+			isEmpty = isPositionEmpty(state.board, col, row)
 			if ( isLarger && isEmpty) {
 				largestOutputYet = aiOutput[col][row]
 				slotChosen = {
@@ -96,24 +94,22 @@ function findR3AiMove(board, aiOutput) {
 			}
 		}
 	}
-
-	// TODO: slotChosen may be undefined
-	return slotChosen
+	return slotChosen // TODO: slotChosen may be undefined
 }
 
 function r3TestAI(iterations) {
 	let wonGames = 0, draws = 0, losses
 	for (var i = 0; i < iterations; i++) {
-		r3NewGame()
+		state = r3NewGame()
 		do{
-			r3Game(randSlot(getR3BoardState()))
-			if( getR3Winner() == 0){
-				r3CreateALastMove(getR3BoardState())
+			r3Game(state, randSlot(state.board))
+			if( state.winner == 0){
+				r3AiMove(state)
 			}
-		}	while ( getR3Winner() == 0){}
-		if (getR3Winner() == -1) {
+		}	while ( state.winner == 0){}
+		if (state.winner == -1) {
 			wonGames++
-		}else if (getR3Winner() == 2) {
+		}else if (state.winner == 2) {
 			draws++
 		}
 	}
@@ -125,8 +121,8 @@ function r3TestAI(iterations) {
 	}
 }
 
-function testAI() {
-	board = convertBoardForAI(getR3BoardState(), getr3PlayerTurn())
+function testAI(state) {
+	board = convertBoardForAI(state.board, state.nextTurn)
 	var output = myR3Network.activate(boardToArray(board))
 	var aiOutput = arrayToBoard(board, output)
 	return aiOutput

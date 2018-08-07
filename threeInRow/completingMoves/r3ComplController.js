@@ -1,13 +1,17 @@
-var itrTrained = 0
+{let itrTrained = 0, boardId = "r3ComplBoard", state, postWinnerElement = "r3ComplRes"
 
 addEventListener("load", () => {
-  r3StartOnlineGame(boardId = "r3ComplBoard")
+  state = r3StartOnlineGame(boardId)
 
   document.getElementById("r3ComplNewGame").addEventListener("click", function () {
-    r3StartOnlineGame(boardId = "r3ComplBoard")
+    state = r3StartOnlineGame(boardId)
   })
-  document.getElementById("r3ComplRandomMove").addEventListener("click", r3RandomMove)
-  document.getElementById("r3ComplAiMove").addEventListener("click", r3MakeAiMove)
+  document.getElementById("r3ComplRandomMove").addEventListener("click", function () {
+      r3RandomMove(state, boardId, postWinnerElement)
+  })
+  document.getElementById("r3ComplAiMove").addEventListener("click", function () {
+    r3MakeAiMove(state, boardId, postWinnerElement)
+  })
   document.getElementById("r3ComplTest").addEventListener("click", function() {
     iterations = 1000
     stats = r3TestAI(iterations)
@@ -20,14 +24,15 @@ addEventListener("load", () => {
     r3TrainAi(newIterations)
     postReplace(element = "r3ComplAi","Trained on for " + itrTrained + " iterations in total")
   })
-  document.getElementById('r3ComplBoard').addEventListener("click", function(){
-    var board = getR3BoardState(), x = event.clientX, y = event.clientY
+  document.getElementById(boardId).addEventListener("click", function(){
+    var board = state.board, x = event.clientX, y = event.clientY
     var slot =
       {
-        column: columnClicked('r3ComplBoard',x,y, board.length, board[0].length),
-        row: rowClicked('r3ComplBoard',x,y, board.length, board[0].length)
+        column: columnClicked(boardId,x,y, board.length, board[0].length),
+        row: rowClicked(boardId,x,y, board.length, board[0].length)
       }
-    r3OnlineGame(slot, boardId = "r3ComplBoard")
+    r3OnlineGame(state, slot, boardId, postWinnerElement)
     }
   )
 })
+}

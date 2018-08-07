@@ -1,9 +1,9 @@
 
-function r3PostWinner(winner) {
+function r3PostWinner(element, winner) {
   winner = winner == -1? 0 : winner
   var players = ["two", "one"]
   var text =  winner == 2 ? "Game drawn" : "Player " + players[winner] + " has won!"
-  postReplace(element = "r3Res", text)
+  postReplace(element, text)
 }
 
 function r3DrawBoard(board, boardId) {
@@ -23,5 +23,5 @@ function r3DrawBoard(board, boardId) {
     return color
   }
 
-  drawBoard(board, canvasName = boardId, canvasColor = someRed, brickColoring)
+  drawBoard(board, boardId, canvasColor = someRed, brickColoring)
 }
