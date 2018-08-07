@@ -1,0 +1,78 @@
+.parButton {
+  margin: 0px;
+}
+
+.button {
+    font-size: 1.25vw;
+    padding: 2%;
+    margin: 0% 0%;
+    border-radius: 20%;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.board{
+  margin: 2.5% 0%;
+  width:50%;
+  height: 50%; //TODO doesnt work?
+}
+
+.h1{
+  font-family: 'Trocchi', serif;
+  font-size: 5vw;
+  font-weight: bold;
+  line-height: 10%;
+  margin: 5% 4%;
+}
+
+.text{
+  font-family: 'Trocchi', serif;
+  font-weight: bold;
+}
+
+.div{
+  border: 2vw solid #0ff;
+  margin: 10%;
+  padding: 0% 2.5%;
+  text-align: center;
+  border-radius: 15%
+}
+
+.parSubtitle{
+  margin: 1vw;
+  font-family: 'Trocchi', serif;
+  font-size: 2.75vw;
+}
+/*
+--------------
+Three in row
+-------------
+*/
+#r3 {border-color: rgb(215,0,0)}
+#headingR3 {color: rgb(145,0,0);}
+#parSubtitleR3 {color: rgb(145,0,0);}
+.buttonR3 {background-color: rgb(198,0,0);}
+#r3Ai {color: rgb(145,0,0);}
+#r3Res {color: rgb(145,0,0);}
+/*
+----------------------
+ Connect connectFour
+----------------------
+*/
+#connectFour{border-color: rgb(134,146,176)}
+#h1C4 {color: rgb(134,146,176);}
+.buttonC4 {background-color: rgb(77,88,119);}
+#c4Post {color: rgb(134,146,176);}
+/*
+-----------
+ XOR
+-----------
+*/
+#xor{border-color: rgb(49,200,49) /* Forest green */}
+#headingXor {color: rgb(43,172,43); /* Forest green */}
+.buttonXor {background-color: rgb(43,172,43); /* Forest green */}
+#xorPost{color: rgb(43,172,43); /* Forest green */}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <!--  General stuff -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/synaptic/1.1.4/synaptic.js"></script>
+    <script src="viewMethods.js" charset="utf-8"></script>
+    <script src="controllerMethods.js" charset="utf-8"></script>
+    <script src="boardMethods.js" charset="utf-8"></script>
+    <script src="aiMethods.js" charset="utf-8"></script>
+
+    <!--  Connect four -->
+    <script src="connectFour/c4Controller.js" charset="utf-8"></script>
+    <script src="connectFour/c4Model.js" charset="utf-8"></script>
+    <script src="connectFour/c4View.js" charset="utf-8"></script>
+
+    <!-- XOR -->
+    <script src="xor/xorController.js" charset="utf-8"></script>
+    <script src="xor/xorModel.js" charset="utf-8"></script>
+    <script src="xor/xorView.js" charset="utf-8"></script>
+    <script src="xor/xorAI.js" charset="utf-8"></script>
+
+    <!-- threeInRow -->
+    <script src="threeInRow/r3Controller.js" charset="utf-8"></script>
+    <script src="threeInRow/r3Model.js" charset="utf-8"></script>
+    <script src="threeInRow/r3View.js" charset="utf-8"></script>
+    <script src="threeInRow/r3Ai.js" charset="utf-8"></script>
+    <script src="threeInRow/r3SelfPlay.js" charset="utf-8"></script>
+    <script src="threeInRow/game/r3GameController.js" charset="utf-8"></script>
+    <script src="threeInRow/selfPlay/r3SelfPlayController.js" charset="utf-8"></script>
+    <script src="threeInRow/completingMoves/r3ComplController.js" charset="utf-8"></script>
+
+    <meta charset="utf-8">
+    <title>Work in progress</title>
+  </head>
+  <body>
+    <!--  Tic-tac-toe self play -->
+    <div class="div" id="r3Self">
+      <h1 class="h1" id="headingSelfR3">Bot 2: self play</h1>
+       <p class="parButton">
+         <button class="button buttonR3" id="r3SelfNewGame"> New game</button>
+         <button class="button buttonR3" id="r3SelfRandomMove"> Random move</button>
+         <button class="button buttonR3" id="r3SelfAiMove"> AI move</button>
+       </p>
+       <p class="parSubtitle" id="parSubtitleR3">
+         Train AI using
+       </p>
+       <p class="parButton">
+         <button class="button buttonR3" id="r3SelfTrain"> Self play</button>
+         <button class="button buttonR3" id="r3SelfTest"> Test AI</button>
+       </p>
+       <p class="text" id="r3SelfAi"> </p>
+       <canvas class="board" id="r3SelfBoard"></canvas>
+       <p class="text" id="r3SelfRes"> </p>
+    </div>
+
+    <!--  Tic-tac-toe - completing move -->
+    <div class="div" id="r3Compl">
+      <h1 class="h1" id="headingR3Compl">Bot 1: completing moves</h1>
+       <p class="parButton">
+         <button class="button buttonR3" id="r3ComplNewGame"> New game</button>
+         <button class="button buttonR3" id="r3ComplRandomMove"> Random move</button>
+         <button class="button buttonR3" id="r3ComplAiMove"> AI move</button>
+       </p>
+       <p class="parSubtitle" id="parSubtitleR3">
+         Train AI using
+       </p>
+       <p class="parButton">
+         <button class="button buttonR3" id="r3ComplTrain"> Winning moves</button>
+         <button class="button buttonR3" id="r3ComplTest"> Test AI</button>
+       </p>
+       <p class="text" id="r3ComplAi"> </p>
+       <canvas class="board" id="r3ComplBoard"></canvas>
+       <p class="text" id="r3ComplRes"> </p>
+    </div>
+
+    <!--  Tic-tac-toe - game -->
+    <div class="div" id="r3">
+      <h1 class="h1" id="headingR3">Tic-tac-toe</h1>
+       <p class="parButton">
+         <button class="button buttonR3" id="r3NewGame"> New game</button>
+         <button class="button buttonR3" id="r3RandomMove"> Random move</button>
+       </p>
+       <canvas class="board" id="r3Board"></canvas>
+       <p class="text" id="r3Res"> </p>
+    </div>
+
+    <!-- XOR -->
+    <div class="div" id="xor">
+      <h1 class="h1" id="headingXor">The XOR problem</h1>
+      <p class="parButton">
+        <button class="button buttonXor" id="xorEvaluate"> Evaluate</button>
+        <button class="button buttonXor" id="xorTestAi"> Test AI</button>
+        <button class="button buttonXor" id="xorTrainAi"> Train AI</button>
+      </p>
+      <p class="text" id="xorPost"> </p>
+      <canvas class="board" id="xorBoard"></canvas>
+    </div>
+
+    <!--  Connect four -->
+    <div class="div" id="connectFour">
+      <h1 class="h1" id="h1C4">Connect four</h1>
+       <p class="parButton">
+         <button class="button buttonC4" id="newGame"> New game</button>
+         <button class="button buttonC4" id="randomMove"> Random move</button>
+       </p>
+       <canvas class="board" id="c4Board"></canvas>
+       <p class="text" id="c4Post"> </p>
+    </div>
+  </body>
+</html>
