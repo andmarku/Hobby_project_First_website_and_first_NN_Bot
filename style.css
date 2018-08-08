@@ -4,7 +4,7 @@
 
 .button {
     font-size: 1.25vw;
-    padding: 2%;
+    padding: 1vw;
     margin: 0% 0%;
     border-radius: 20%;
     border: none;
@@ -15,24 +15,26 @@
     cursor: pointer;
 }
 
-.board{
-  margin: 2.5% 0%;
-  width: 30vw;
-  height: 30vh;
-}
-
 .h1{
   font-family: 'Trocchi', serif;
   font-size: 3.5vw;
   font-weight: bold;
-  line-height: 10%;
-  margin: 5% 4%;
+  line-height: 40%;
+  margin: 3% 4%;
 }
 
 .text{
   font-family: 'Trocchi', serif;
   font-weight: bold;
   font-size: 1.25vw;
+}
+.idea{
+  margin: 1% 0%;
+  display: inline-block;
+  max-width: 50vw;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-align: justify;
 }
 
 .div{
@@ -43,37 +45,66 @@
   border-radius: 15%
 }
 
+.board{
+  margin: 1.5% 0%;
+  width: 30vw;
+  height: 30vh;
+}
+
+.left{
+  margin: 0vh 3.25vw;
+  width: 15vw;
+  float: left;
+  overflow:hidden;
+}
+.innerLeft{
+  float: right;
+  width: 10vw;
+}
+.right{
+  margin-left: 0%;
+  overflow:hidden;
+}
+.innerRight{
+  float: left;
+}
+
 .parSubtitle{
   margin: 1vw;
   font-family: 'Trocchi', serif;
   font-size: 2.75vw;
 }
-/*
---------------
-Three in row
--------------
-*/
-#r3 {border-color: rgb(215,0,0)}
-#headingR3 {color: rgb(145,0,0);}
-#parSubtitleR3 {color: rgb(145,0,0);}
-.buttonR3 {background-color: rgb(198,0,0);}
-#r3Ai {color: rgb(145,0,0);}
-#r3Res {color: rgb(145,0,0);}
-/*
-----------------------
- Connect connectFour
-----------------------
-*/
+
+/* --------------
+Three in row - self play */
+.self {
+  color: rgb(94,65,47);
+  border-color: rgb(94,65,47)
+}
+.selfButton {background-color: rgb(94,65,47);}
+/* --------------
+Three in row - winning move */
+.compl {
+  color: rgb(128,0,128);
+  border-color: rgb(128,0,128)
+}
+.complButton {background-color: rgb(128,0,128);}
+/* --------------
+Three in row - game */
+.r3 {
+  color: rgb(145,0,0);
+  border-color: rgb(145,0,0)
+}
+.r3Button {background-color: rgb(145,0,0);}
+/* ----------------------
+ Connect connectFour */
 #connectFour{border-color: rgb(134,146,176)}
 #h1C4 {color: rgb(134,146,176);}
 .buttonC4 {background-color: rgb(77,88,119);}
 #c4Post {color: rgb(134,146,176);}
-/*
------------
- XOR
------------
-*/
+/* -----------
+ XOR */
+.xor{ color: rgb(43,172,43); /* Forest green */ }
 #xor{border-color: rgb(49,200,49) /* Forest green */}
-#headingXor {color: rgb(43,172,43); /* Forest green */}
+#h1Xor {color: rgb(43,172,43); /* Forest green */}
 .buttonXor {background-color: rgb(43,172,43); /* Forest green */}
-#xorPost{color: rgb(43,172,43); /* Forest green */}

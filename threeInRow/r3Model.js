@@ -9,13 +9,13 @@ function r3NewGame() {
            }
 }
 
-function r3StartOnlineGame(boardId) {
+function r3StartOnlineGame(boardId, canvasColor) {
   let state = r3NewGame()
-  r3DrawBoard(state.board,boardId)
+  r3DrawBoard(state.board,boardId, canvasColor)
   return state
 }
 
-function r3OnlineGame(state, slot, boardId, postWinnerElement) {
+function r3OnlineGame(state, slot, boardId, postWinnerElement, canvasColor) {
   /* If the slot is empty, make a move */
   if(isPositionEmpty(state.board, slot.column, slot.row)){
     r3Game(state, slot)
@@ -24,7 +24,7 @@ function r3OnlineGame(state, slot, boardId, postWinnerElement) {
       r3PostWinner(postWinnerElement, state.winner)
     }
   }
-  r3DrawBoard(state.board, boardId)
+  r3DrawBoard(state.board, boardId, canvasColor)
 }
 
 function r3Game(state, slot) {
@@ -47,12 +47,12 @@ function r3Game(state, slot) {
   return state.winner
 }
 
-function r3RandomMove(state, boardId, postWinnerElement) { // TODO:  ugly solution
+function r3RandomMove(state, boardId, postWinnerElement, canvasColor) { // TODO:  ugly solution
   if (isBoardFull(state.board)) { return }
-  r3OnlineGame(state, randSlot(state.board),boardId, postWinnerElement)
+  r3OnlineGame(state, randSlot(state.board),boardId, postWinnerElement, canvasColor)
 }
 
-function r3MakeAiMove(state, boardId, postWinnerElement) {
+function r3MakeAiMove(state, boardId, postWinnerElement, canvasColor) {
   if (isBoardFull(state.board)) { return }
-  r3OnlineGame(state, r3AiMove(state),boardId, postWinnerElement)
+  r3OnlineGame(state, r3AiMove(state),boardId, postWinnerElement, canvasColor)
 }

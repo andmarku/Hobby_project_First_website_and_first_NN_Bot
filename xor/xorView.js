@@ -11,9 +11,7 @@ function postAiResult(isCorrect) {
   postReplace(element = "xorPost", text)
 }
 
-function xorDrawBoard(board) {
-  var someGreen = "rgb(34,139,34)"
-
+function xorDrawBoard(board, canvasColor) {
   // Define the color of the bricks for this game
   function brickColoring(element) {
     if( element == 0) {
@@ -24,5 +22,5 @@ function xorDrawBoard(board) {
     }
     return color
   }
-  drawBoard(board, canvasName = 'xorBoard', canvasColor = someGreen, brickColoring)
+  drawBoard(board, canvasName = 'xorBoard', canvasColor, brickColoring)
 }

@@ -1,16 +1,16 @@
-{let selfItrTrained = 0, state, boardId = "r3SelfBoard", postWinnerElement = "r3SelfRes"
+{let selfItrTrained = 0, state, boardId = "r3SelfBoard", postWinnerElement = "r3SelfRes", canvasColor = "rgb(94,65,47)"
 
 addEventListener("load", () => {
-  state = r3StartOnlineGame(boardId)
+  state = r3StartOnlineGame(boardId, canvasColor)
 
   document.getElementById("r3SelfNewGame").addEventListener("click", function () {
-    state = r3StartOnlineGame(boardId)
+    state = r3StartOnlineGame(boardId, canvasColor)
   })
   document.getElementById("r3SelfRandomMove").addEventListener("click", function () {
-    r3RandomMove(state, boardId, postWinnerElement)
+    r3RandomMove(state, boardId, postWinnerElement, canvasColor)
   })
   document.getElementById("r3SelfAiMove").addEventListener("click",  function () {
-    r3MakeAiMove(state, boardId, postWinnerElement)
+    r3MakeAiMove(state, boardId, postWinnerElement, canvasColor)
   })
 
   document.getElementById("r3SelfTest").addEventListener("click", function() {
@@ -21,10 +21,10 @@ addEventListener("load", () => {
   })
 
   document.getElementById("r3SelfTrain").addEventListener("click", function() {
-    var newIterations = 5000
+    let newIterations = 5000
     selfItrTrained += newIterations
     r3SelfPlay(newIterations)
-    postReplace(element = "r3SelfAi","Trained on for " + selfItrTrained + " iterations in total")
+    postReplace(element = "r3SelfAi","Trained for " + selfItrTrained + " iterations in total")
   })
 
   document.getElementById(boardId).addEventListener("click", function(){
@@ -34,7 +34,7 @@ addEventListener("load", () => {
         column: columnClicked(boardId,x,y, board.length, board[0].length),
         row: rowClicked(boardId,x,y, board.length, board[0].length)
       }
-    r3OnlineGame(state, slot, boardId, postWinnerElement)
+    r3OnlineGame(state, slot, boardId, postWinnerElement, canvasColor)
     }
   )
 })

@@ -6,9 +6,7 @@ function r3PostWinner(element, winner) {
   postReplace(element, text)
 }
 
-function r3DrawBoard(board, boardId) {
-  var someRed = "rgb(102,0,0)"
-
+function r3DrawBoard(board, boardId, canvasColor) {
   // Define the color of the bricks for this game
   function brickColoring(element) {
     if( element == 0) {
@@ -23,5 +21,5 @@ function r3DrawBoard(board, boardId) {
     return color
   }
 
-  drawBoard(board, boardId, canvasColor = someRed, brickColoring)
+  drawBoard(board, boardId, canvasColor, brickColoring)
 }

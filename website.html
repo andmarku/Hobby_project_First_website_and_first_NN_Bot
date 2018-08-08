@@ -35,65 +35,95 @@
   </head>
   <body>
     <!--  Tic-tac-toe self play -->
-    <div class="div" id="r3">
-      <h1 class="h1" id="headingR3">Bot 2: self play</h1>
-       <p class="parButton">
-         <button class="button buttonR3" id="r3SelfNewGame"> New game</button>
-         <button class="button buttonR3" id="r3SelfRandomMove"> Random move</button>
-         <button class="button buttonR3" id="r3SelfAiMove"> AI move</button>
-       </p>
-       <p class="parSubtitle" id="parSubtitleR3">
-         Train AI using
-       </p>
-       <p class="parButton">
-         <button class="button buttonR3" id="r3SelfTrain"> Self play</button>
-         <button class="button buttonR3" id="r3SelfTest"> Test AI</button>
-       </p>
-       <p class="text" id="r3SelfAi"> </p>
-       <canvas class="board" id="r3SelfBoard"></canvas>
-       <p class="text" id="r3SelfRes"> </p>
+    <div class="div self" id="r3">
+      <div>
+        <h1 class="h1 self" id="h1Self">Bot 2: self play</h1>
+        <p class="text self idea">
+          The idea is to train the AI using games it plays against itself. After
+          a game has been played, the board state before each of the winners moves
+          is set as input to train on, with the choosen move as the correct output.
+          When the AI plays a draw against itself, it instead plays a game against
+          a random opponent.
+        </p>
+        <p class="parButton">
+         <button class="button selfButton" id="r3SelfNewGame"> New game</button>
+         <button class="button selfButton" id="r3SelfRandomMove"> Random move</button>
+         <button class="button selfButton" id="r3SelfAiMove"> AI move</button>
+        </p>
+      </div>
+      <div class="left">
+        <div class="innerLeft">
+           <p>
+             <button class="button selfButton" id="r3SelfTrain"> Train AI</button>
+           </p>
+           <p>
+             <button class="button selfButton" id="r3SelfTest"> Test AI</button>
+           </p>
+           <p class="text self" id="r3SelfAi"> </p>
+         </div>
+      </div>
+      <div class="right">
+        <div class="innerRight">
+          <canvas class="board" id="r3SelfBoard"></canvas>
+          <p class="text self" id="r3SelfRes"> </p>
+        </div>
+      </div>
     </div>
 
     <!--  Tic-tac-toe - completing move -->
-    <div class="div" id="r3">
-      <h1 class="h1" id="headingR3">Bot 1: completing moves</h1>
-       <p class="parButton">
-         <button class="button buttonR3" id="r3ComplNewGame"> New game</button>
-         <button class="button buttonR3" id="r3ComplRandomMove"> Random move</button>
-         <button class="button buttonR3" id="r3ComplAiMove"> AI move</button>
-       </p>
-       <p class="parSubtitle" id="parSubtitleR3">
-         Train AI using
-       </p>
-       <p class="parButton">
-         <button class="button buttonR3" id="r3ComplTrain"> Winning moves</button>
-         <button class="button buttonR3" id="r3ComplTest"> Test AI</button>
-       </p>
-       <p class="text" id="r3ComplAi"> </p>
-       <canvas class="board" id="r3ComplBoard"></canvas>
-       <p class="text" id="r3ComplRes"> </p>
+    <div class="div compl" id="r3Compl">
+      <h1 class="h1 compl" id="h1Compl">Bot 1: completing moves</h1>
+      <p class="text compl idea">
+        In order to train the AI a database of games is created by letting two
+        random bots play as many games as needed, keeping only those with a
+        desicive winner. The board states before the winning moves are then of
+        set as input to train on, with the winning move as the correct output.
+      </p>
+      <p class="parButton">
+         <button class="button complButton" id="r3ComplNewGame"> New game</button>
+         <button class="button complButton" id="r3ComplRandomMove"> Random move</button>
+         <button class="button complButton" id="r3ComplAiMove"> AI move</button>
+      </p>
+      <div class="left">
+         <div class="innerLeft">
+           <p>
+             <button class="button complButton" id="r3ComplTrain"> Train AI</button>
+           </p>
+           <p>
+             <button class="button complButton" id="r3ComplTest"> Test AI</button>
+           </p>
+           <p class="text compl" id="r3ComplAi"> </p>
+         </div>
+      </div>
+       <div class="right">
+         <div class="innerRight">
+           <canvas class="board" id="r3ComplBoard"></canvas>
+           <p class="text compl" id="r3ComplRes"> </p>
+         </div>
+       </div>
     </div>
 
     <!--  Tic-tac-toe - game -->
-    <div class="div" id="r3">
-      <h1 class="h1" id="headingR3">Tic-tac-toe</h1>
-       <p class="parButton">
-         <button class="button buttonR3" id="r3NewGame"> New game</button>
-         <button class="button buttonR3" id="r3RandomMove"> Random move</button>
+    <div class="div r3" id="r3">
+      <h1 class="h1  r3" id="h1R3">Tic-tac-toe</h1>
+       <p class="parButton  r3">
+         <button class="button r3Button" id="r3NewGame"> New game</button>
+         <button class="button r3Button" id="r3RandomMove"> Random move</button>
        </p>
        <canvas class="board" id="r3Board"></canvas>
-       <p class="text" id="r3Res"> </p>
+       <p class="text  r3" id="r3Res"> </p>
     </div>
 
     <!-- XOR -->
     <div class="div" id="xor">
-      <h1 class="h1" id="headingXor">The XOR problem</h1>
+      <h1 class="h1" id="h1Xor">The XOR problem</h1>
       <p class="parButton">
         <button class="button buttonXor" id="xorEvaluate"> Evaluate</button>
         <button class="button buttonXor" id="xorTestAi"> Test AI</button>
         <button class="button buttonXor" id="xorTrainAi"> Train AI</button>
       </p>
-      <p class="text" id="xorPost"> </p>
+      <p class="text xor" id="r3xorItr"> </p>
+      <p class="text xor" id="xorPost"> </p>
       <canvas class="board" id="xorBoard"></canvas>
     </div>
 

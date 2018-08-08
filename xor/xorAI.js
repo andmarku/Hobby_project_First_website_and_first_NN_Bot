@@ -1,8 +1,10 @@
+{let myXorNetwork = createNetwork(numInputlayer=2,numHiddenLayer=2,numOutputLayer=1)
+
 function createNetwork(numInputlayer, numHiddenLayer, numOutputLayer) {
 
-	var inputLayer = new window.synaptic.Layer(numInputlayer)
-	var hiddenLayer = new window.synaptic.Layer(numHiddenLayer)
-	var outputLayer = new window.synaptic.Layer(numOutputLayer)
+	let inputLayer = new window.synaptic.Layer(numInputlayer)
+	let hiddenLayer = new window.synaptic.Layer(numHiddenLayer)
+	let outputLayer = new window.synaptic.Layer(numOutputLayer)
 
 	inputLayer.project(hiddenLayer)
 	hiddenLayer.project(outputLayer)
@@ -12,11 +14,10 @@ function createNetwork(numInputlayer, numHiddenLayer, numOutputLayer) {
 		hidden: [hiddenLayer],
 		output: outputLayer
 	})
-
 }
 
 function generateXorCases() {
-	var cases = [
+	let cases = [
 		{ input: [0,0], output: [1]	},
 		{ input: [1,1], output: [1]	},
 		{ input: [1,0], output: [0]	},
@@ -25,12 +26,11 @@ function generateXorCases() {
 	return cases
 }
 
-var myXorNetwork = createNetwork(numInputlayer=2,numHiddenLayer=2,numOutputLayer=1)
-
-function trainXor() {
-	aiTrainer(myXorNetwork, learningRate = 0.3, iterations = 1000, dataset = generateXorCases())
+function trainXor(iterations) {
+	aiTrainer(myXorNetwork, learningRate = 0.3, iterations, dataset = generateXorCases())
 }
 
-function testXorAi(input) {
-	return	Math.round(myXorNetwork.activate(input))
+function testXorAi(boardAsArray) {
+	return	Math.round(myXorNetwork.activate(boardAsArray))
+}
 }
