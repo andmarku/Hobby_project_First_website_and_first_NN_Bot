@@ -24,3 +24,17 @@ function xorDrawBoard(board, canvasColor) {
   }
   drawBoard(board, canvasName = 'xorBoard', canvasColor, brickColoring)
 }
+
+function xorShowNet(board, canvasColor) {
+  // Define the color of the bricks for this game
+  function brickColoring(element) {
+    if( element == 0) {
+      color = canvasColor
+    } else {
+      // yellowish
+      color = canvasColor
+    }
+    return color
+  }
+  paintNetwork(board, canvasName = 'xorBoard', canvasColor, brickColoring, myXorNetwork)
+}

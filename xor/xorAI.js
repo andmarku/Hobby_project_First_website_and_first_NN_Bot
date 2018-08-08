@@ -1,5 +1,8 @@
-{let myXorNetwork = createNetwork(numInputlayer=2,numHiddenLayer=2,numOutputLayer=1)
+var myXorNetwork = createNetwork(numInputlayer=2,numHiddenLayer=2,numOutputLayer=1)
 
+function test() {
+	paintNetwork("xorBoard", myXorNetwork)
+}
 function createNetwork(numInputlayer, numHiddenLayer, numOutputLayer) {
 
 	let inputLayer = new window.synaptic.Layer(numInputlayer)
@@ -32,5 +35,4 @@ function trainXor(iterations) {
 
 function testXorAi(boardAsArray) {
 	return	Math.round(myXorNetwork.activate(boardAsArray))
-}
 }
