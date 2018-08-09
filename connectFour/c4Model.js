@@ -1,7 +1,7 @@
-var boardState, playerTurn, winner, lastMove, wonGame
+let boardState, playerTurn, winner, lastMove, wonGame
 
 function c4NewGame() {
-  var newBoardState = createBoard(numberOfColumns = 7, numberOfRows = 6)
+  let newBoardState = createBoard(numberOfColumns = 7, numberOfRows = 6)
   setC4BoardState(newBoardState)
   playerTurn = 1
   winner = 0
@@ -14,7 +14,7 @@ function startOnlineGame() { // TODO - can send method names also!
 }
 
 function playOnlineGame(column) {
-  var winner = gamePlay(column)
+  let winner = gamePlay(column)
   if( winner != 0 && !wonGame){
     wonGame = true
     postWinner(winner)
@@ -28,11 +28,11 @@ function gamePlay(column) {
     return winner
   }
 
-  var row = getEmptyRowInColumn(getC4BoardState(), column)
+  let row = getEmptyRowInColumn(getC4BoardState(), column)
 
   /* If the row isn't full, make a move */
   if(row != -1){
-    var newBoardState = updateBoard(getC4BoardState(), column, row, playerTurn)
+    let newBoardState = updateBoard(getC4BoardState(), column, row, playerTurn)
     setC4BoardState(newBoardState)
     lastMove = [column, row]
     winner = (winner==0 && checkForWin(getC4BoardState(), playerTurn, numNeeded = 4))?

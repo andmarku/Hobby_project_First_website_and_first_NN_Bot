@@ -1,9 +1,9 @@
 
 function r3SelfPlay(itr) {
-	var iterations = 50, learningRate = 0.1
+	let iterations = 50, learningRate = 0.1
 	console.log("Training");
 
-	for (var i = 0; i < itr/iterations; i++) {
+	for (let i = 0; i < itr/iterations; i++) {
 		state = r3NewGame()
 		while( r3Game(state, r3AiMove(state)) == 0){}
 
@@ -27,8 +27,8 @@ function r3SelfPlay(itr) {
 
 
 function createDatasetFromGameLog(gameLog) {
-	var almostWonBoard, correctAnswer, dataset = [], counter = 1
-	for (var i = gameLog.length -1; i  >  -1; i--) {
+	let almostWonBoard, correctAnswer, dataset = [], counter = 1
+	for (let i = gameLog.length -1; i  >  -1; i--) {
 		// Remove the last move
 		almostWonBoard = updateBoard(state.board, column = gameLog[i].column,
 		row = gameLog[i].row, value=0)

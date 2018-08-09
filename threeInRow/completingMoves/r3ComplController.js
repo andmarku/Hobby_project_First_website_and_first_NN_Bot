@@ -1,38 +1,35 @@
-{let itrTrained = 0, boardId = "r3ComplBoard", state, postWinnerElement = "r3ComplRes", canvasColor = "rgb(128,0,128)"
+{let itrTrained = 0, boardId = "r3ComplBoard", state, isBoardShown = true,
+  postWinnerElement = "r3ComplRes", canvasColor = "rgb(128,0,128)", network
 
 addEventListener("load", () => {
   state = r3StartOnlineGame(boardId, canvasColor)
+  network = complNetwork()
 
   document.getElementById("r3ComplNewGame").addEventListener("click", function () {
-    state = r3StartOnlineGame(boardId, canvasColor)
+    if(isBoardShown)
+      state = r3StartOnlineGame(boardId, canvasColor)
   })
   document.getElementById("r3ComplRandomMove").addEventListener("click", function () {
+    if(isBoardShown)
       r3RandomMove(state, boardId, postWinnerElement, canvasColor)
   })
   document.getElementById("r3ComplAiMove").addEventListener("click", function () {
-    r3MakeAiMove(state, boardId, postWinnerElement, canvasColor)
+    if(isBoardShown)
+      r3MakeAiMove(network, state, boardId, postWinnerElement, canvasColor)
   })
   document.getElementById("r3ComplTest").addEventListener("click", function() {
-    iterations = 1000
-    stats = r3TestAI(iterations)
-    postReplace(element = "r3ComplAi","The AI won " + stats.won + ", drew " + stats.drawed +
-      " and lost " + stats.lost + " out of " + iterations + " vs a random bot")
+    stats = r3TestAI(network, iterations = 1000)
+    postResAiTest(element = "r3ComplAi", iterations, stats)
   })
   document.getElementById("r3ComplTrain").addEventListener("click", function() {
-    var newIterations = 5000
-    itrTrained += newIterations
-    r3TrainAi(newIterations)
-    postReplace(element = "r3ComplAi","Trained for " + itrTrained + " iterations in total")
+    itrTrained = r3Train(element = "r3ComplAi", network, newIterations = 5000, itrTrained)
   })
   document.getElementById(boardId).addEventListener("click", function(){
-    var board = state.board, x = event.clientX, y = event.clientY
-    var slot =
-      {
-        column: columnClicked(boardId,x,y, board.length, board[0].length),
-        row: rowClicked(boardId,x,y, board.length, board[0].length)
-      }
-    r3OnlineGame(state, slot, boardId, postWinnerElement, canvasColor)
-    }
-  )
+    r3ColumnClicked(isBoardShown, state, boardId, canvasColor, postWinnerElement,
+      event.clientX, event.clientY)
+  })
+  document.getElementById("r3ComplShowNet").addEventListener("click", function(){
+    isBoardShown = r3ShowNet(isBoardShown, state, boardId, canvasColor, network)
+  })
 })
 }

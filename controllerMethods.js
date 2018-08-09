@@ -1,13 +1,13 @@
-var originalLog = console.log
+let originalLog = console.log
 console.log = function (obj) {
   originalLog(JSON.parse(JSON.stringify(obj)))
 }
 
 
 function columnClicked(boardId, x,y, numberOfColumns, numberOfRows) {
-  var brickProp = getBrickProperties(boardId, numberOfColumns, numberOfRows)
-  var leftEdge = document.getElementById(boardId).getBoundingClientRect().left
-  var column = 0
+  let brickProp = getBrickProperties(boardId, numberOfColumns, numberOfRows)
+  let leftEdge = document.getElementById(boardId).getBoundingClientRect().left
+  let column = 0
 
   x -= leftEdge + brickProp.xPadding + brickProp.xPadding/2 + 2*brickProp.radius
   while (x>0 && column < (numberOfColumns - 1)){
@@ -21,7 +21,7 @@ function rowClicked(boardId, x,y, numberOfColumns, numberOfRows) {
   const brickProp = getBrickProperties(boardId, numberOfColumns, numberOfRows)
   y -= document.getElementById(boardId).getBoundingClientRect().top
   y -= brickProp.yPadding/2 + brickProp.yPadding + 2*brickProp.radius
-  var row = 0
+  let row = 0
   while (y>0 && row < (numberOfRows - 1)){
     row += 1
     y -= brickProp.yPadding + 2*brickProp.radius

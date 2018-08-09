@@ -11,9 +11,9 @@ addEventListener("load", () => {
   // document.getElementById("trainAi").addEventListener("click", trainMyNet)
 
   document.getElementById('c4Board').addEventListener("click", function(){
-    var newBoard = getC4BoardState()
-    var x = event.clientX
-    var y = event.clientY
+    let newBoard = getC4BoardState()
+    let x = event.clientX
+    let y = event.clientY
     playOnlineGame(columnClicked('c4Board',x,y, newBoard.length, newBoard[0].length))
     }
   )

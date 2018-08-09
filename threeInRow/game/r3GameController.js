@@ -12,8 +12,8 @@ addEventListener("load", () => {
   })
 
   document.getElementById(boardId).addEventListener("click", function(){
-    var board = state.board, x = event.clientX, y = event.clientY
-    var slot =
+    let board = state.board, x = event.clientX, y = event.clientY
+    let slot =
       {
         column: columnClicked(boardId,x,y, board.length, board[0].length),
         row: rowClicked(boardId,x,y, board.length, board[0].length)

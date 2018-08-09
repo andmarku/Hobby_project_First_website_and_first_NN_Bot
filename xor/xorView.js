@@ -1,17 +1,17 @@
 
 function postResult(isCorrect) {
-  var text = isCorrect? "The board fullfills 'either or'." :
+  let text = isCorrect? "The board fullfills 'either or'." :
    "The board does not fullfill 'either or'."
   postReplace(element = "xorPost", text)
 }
 
 function postAiResult(isCorrect) {
-  var text = isCorrect? "The AI thinks that the board fullfills 'either or'." :
+  let text = isCorrect? "The AI thinks that the board fullfills 'either or'." :
    "The AI thinks that the board does not fullfill 'either or'."
   postReplace(element = "xorPost", text)
 }
 
-function xorDrawBoard(board, canvasColor) {
+function xorDrawBoard(board, canvasName, canvasColor) {
   // Define the color of the bricks for this game
   function brickColoring(element) {
     if( element == 0) {
@@ -22,19 +22,9 @@ function xorDrawBoard(board, canvasColor) {
     }
     return color
   }
-  drawBoard(board, canvasName = 'xorBoard', canvasColor, brickColoring)
+  drawBoard(board, canvasName, canvasColor, brickColoring)
 }
 
-function xorShowNet(board, canvasColor) {
-  // Define the color of the bricks for this game
-  function brickColoring(element) {
-    if( element == 0) {
-      color = canvasColor
-    } else {
-      // yellowish
-      color = canvasColor
-    }
-    return color
-  }
-  paintNetwork(board, canvasName = 'xorBoard', canvasColor, brickColoring, myXorNetwork)
+function xorShowNet(canvasName, canvasColor, network) {
+  paintNetwork(canvasName, canvasColor, network)
 }

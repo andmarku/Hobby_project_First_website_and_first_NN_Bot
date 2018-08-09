@@ -52,7 +52,7 @@ function r3RandomMove(state, boardId, postWinnerElement, canvasColor) { // TODO:
   r3OnlineGame(state, randSlot(state.board),boardId, postWinnerElement, canvasColor)
 }
 
-function r3MakeAiMove(state, boardId, postWinnerElement, canvasColor) {
+function r3MakeAiMove(network, state, boardId, postWinnerElement, canvasColor) {
   if (isBoardFull(state.board)) { return }
-  r3OnlineGame(state, r3AiMove(state),boardId, postWinnerElement, canvasColor)
+  r3OnlineGame(state, r3AiMove(network, state),boardId, postWinnerElement, canvasColor)
 }

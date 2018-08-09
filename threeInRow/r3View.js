@@ -1,8 +1,8 @@
 
 function r3PostWinner(element, winner) {
   winner = winner == -1? 0 : winner
-  var players = ["two", "one"]
-  var text =  winner == 2 ? "Game drawn" : "Player " + players[winner] + " has won!"
+  let players = ["two", "one"]
+  let text =  winner == 2 ? "Game drawn" : "Player " + players[winner] + " has won!"
   postReplace(element, text)
 }
 
@@ -20,6 +20,10 @@ function r3DrawBoard(board, boardId, canvasColor) {
     }
     return color
   }
-
   drawBoard(board, boardId, canvasColor, brickColoring)
+}
+
+function postResAiTest(element, iterations, stats) {
+  postReplace(element,"The AI won " + stats.won + ", drew " + stats.drawed +
+    " and lost " + stats.lost + " out of " + iterations + " vs a random bot")
 }

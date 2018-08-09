@@ -45,25 +45,22 @@
           When the AI plays a draw against itself, it instead plays a game against
           a random opponent.
         </p>
-        <p class="parButton">
-         <button class="button selfButton" id="r3SelfNewGame"> New game</button>
-         <button class="button selfButton" id="r3SelfRandomMove"> Random move</button>
-         <button class="button selfButton" id="r3SelfAiMove"> AI move</button>
-        </p>
       </div>
       <div class="left">
         <div class="innerLeft">
-           <p>
-             <button class="button selfButton" id="r3SelfTrain"> Train AI</button>
-           </p>
-           <p>
-             <button class="button selfButton" id="r3SelfTest"> Test AI</button>
-           </p>
-           <p class="text self" id="r3SelfAi"> </p>
+          <p> <button class="button selfButton" id="r3SelfShowNet"> Show network/board</button> </p>
+          <p> <button class="button selfButton" id="r3SelfTrain"> Train AI</button> <p>
+          <p> <button class="button selfButton" id="r3SelfTest"> Test AI</button> </p>
+          <p class="text self" id="r3SelfAi"> </p>
          </div>
       </div>
       <div class="right">
         <div class="innerRight">
+          <p class="parButton">
+            <button class="button selfButton" id="r3SelfNewGame"> New game</button>
+            <button class="button selfButton" id="r3SelfRandomMove"> Random move</button>
+            <button class="button selfButton" id="r3SelfAiMove"> AI move</button>
+          </p>
           <canvas class="board" id="r3SelfBoard"></canvas>
           <p class="text self" id="r3SelfRes"> </p>
         </div>
@@ -72,31 +69,30 @@
 
     <!--  Tic-tac-toe - completing move -->
     <div class="div compl" id="r3Compl">
-      <h1 class="h1 compl" id="h1Compl">Bot 1: completing moves</h1>
-      <p class="text compl idea">
-        In order to train the AI a database of games is created by letting two
-        random bots play as many games as needed, keeping only those with a
-        desicive winner. The board states before the winning moves are then of
-        set as input to train on, with the winning move as the correct output.
-      </p>
-      <p class="parButton">
-         <button class="button complButton" id="r3ComplNewGame"> New game</button>
-         <button class="button complButton" id="r3ComplRandomMove"> Random move</button>
-         <button class="button complButton" id="r3ComplAiMove"> AI move</button>
-      </p>
+      <div>
+        <h1 class="h1 compl" id="h1Compl">Bot 1: completing moves</h1>
+        <p class="text compl idea">
+          In order to train the AI a database of games is created by letting two
+          random bots play as many games as needed, keeping only those with a
+          desicive winner. The board states before the winning moves are then of
+          set as input to train on, with the winning move as the correct output.
+        </p>
+      </div>
       <div class="left">
          <div class="innerLeft">
-           <p>
-             <button class="button complButton" id="r3ComplTrain"> Train AI</button>
-           </p>
-           <p>
-             <button class="button complButton" id="r3ComplTest"> Test AI</button>
-           </p>
+           <p> <button class="button complButton" id="r3ComplShowNet"> Show network/board</button></p>
+           <p> <button class="button complButton" id="r3ComplTrain"> Train AI</button></p>
+           <p> <button class="button complButton" id="r3ComplTest"> Test AI</button> </p>
            <p class="text compl" id="r3ComplAi"> </p>
          </div>
       </div>
        <div class="right">
          <div class="innerRight">
+           <p class="parButton">
+             <button class="button complButton" id="r3ComplNewGame"> New game</button>
+             <button class="button complButton" id="r3ComplRandomMove"> Random move</button>
+             <button class="button complButton" id="r3ComplAiMove"> AI move</button>
+           </p>
            <canvas class="board" id="r3ComplBoard"></canvas>
            <p class="text compl" id="r3ComplRes"> </p>
          </div>
@@ -116,7 +112,18 @@
 
     <!-- XOR -->
     <div class="div" id="xor">
-      <h1 class="h1" id="h1Xor">The XOR problem</h1>
+      <div>
+        <h1 class="h1" id="h1Xor">The XOR problem</h1>
+        <p class="text xor idea">
+          The XOR-problem is the most basic problem to solve with a neural
+          network. It is here solved with small network (press Show network for
+          an illustration), using supervised learning. The latter means that the
+          network output is calculated for given a certain input, which is then
+          compared to a desired output. The weights are then changed so that the
+          next time the same input is used, the output will be closer to the correct
+          answer.
+        </p>
+      </div>
       <p class="parButton">
         <button class="button buttonXor" id="xorEvaluate"> Evaluate</button>
         <button class="button buttonXor" id="xorTestAi"> Test AI</button>

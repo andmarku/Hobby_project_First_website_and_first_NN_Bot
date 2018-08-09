@@ -1,16 +1,16 @@
 
-function xorNewGame(canvasColor) {
+function xorNewGame(canvasColor,boardId) {
   let state = {
     board: createBoard(numberOfColumns = 2, numberOfRows = 1),
     winner: 0
   }
-  xorDrawBoard(state.board,canvasColor)
+  xorDrawBoard(state.board,boardId,canvasColor)
   return state
 }
 
-function xorPlayOnlineGame(column, state,canvasColor) {
+function xorPlayOnlineGame(column, state,canvasColor,boardId) {
   state = xorChangeBrick(column, state)
-  xorDrawBoard(state.board,canvasColor)
+  xorDrawBoard(state.board,boardId,canvasColor)
 }
 
 function xorChangeBrick(column, state) {

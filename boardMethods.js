@@ -4,10 +4,8 @@ function convertBoardForAI(board, player) {
 }
 
 function createBoard(numberOfColumns, numberOfRows) {
-  var board = []
-  var column = []
-  let a = 0
-  for (var j = 0; j < numberOfColumns; j++) {
+  let board = [], column = [], a = 0
+  for (let j = 0; j < numberOfColumns; j++) {
     board.push(Array(numberOfRows).fill(0))
   }
   return board
@@ -19,7 +17,7 @@ function updateBoard(board, column, row, value) {
 }
 
 function boardToArray(board) {
-    var boardAsArr = []
+    let boardAsArr = []
     board.map((arr) => {
       arr.map((element) => {
         boardAsArr.push(element)
@@ -30,9 +28,9 @@ function boardToArray(board) {
 
 function arrayToBoard(board, array) {
   newBoard = createBoard(board.length, board[0].length)
-	var i = 0
-	for (var col = 0; col < newBoard.length; col++) {
-		for (var row = 0; row < newBoard[0].length; row++) {
+	let i = 0
+	for (let col = 0; col < newBoard.length; col++) {
+		for (let row = 0; row < newBoard[0].length; row++) {
 			newBoard = updateBoard(newBoard,col,row, value = array[i])
 			i++
 		}
@@ -49,7 +47,7 @@ function randColumn(availableCols) { // TODO may crash here
 }
 
 function randSlot(board) {
-  var emptySlots = findEmptySlots(board)
+  let emptySlots = findEmptySlots(board)
   if (emptySlots.length == 0) {
     console.log("No legal moves left");
     return -1
@@ -58,9 +56,9 @@ function randSlot(board) {
 }
 
 function nonFullColumns(board) {
-  var availableCols = []
-  for (var column = 0; column < board.length; column++) {
-    for (var row = board[0].length-1; row > -1; row--) {
+  let availableCols = []
+  for (let column = 0; column < board.length; column++) {
+    for (let row = board[0].length-1; row > -1; row--) {
       if( board[column][row] == 0){
         availableCols.push(column)
         break
@@ -70,16 +68,12 @@ function nonFullColumns(board) {
   }
 
   function findEmptySlots(board) {
-    var emptySlots = []
-    for (var row = 0; row < board[0].length; row++) {
-      for (var column = board.length-1; column > -1; column--) {
+    let emptySlots = []
+    for (let row = 0; row < board[0].length; row++) {
+      for (let column = board.length-1; column > -1; column--) {
         if( board[column][row] == 0){
-          emptySlots.push(
-            {
-              column : column,
-              row : row
-            }
-          )
+          emptySlots.push({ column : column,
+                            row : row })
         }
       }}
       return emptySlots
@@ -145,7 +139,7 @@ function isInLine(board,col, row, player) {
 }
 
 function getEmptyRowInColumn(board, column) {
-  for (var row = board[0].length-1; row > -1; row--) {
+  for (let row = board[0].length-1; row > -1; row--) {
     if( board[column][row] == 0){
       return row
     }
