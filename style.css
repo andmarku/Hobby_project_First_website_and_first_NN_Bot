@@ -4,8 +4,8 @@
 
 .button {
     font-size: 1.25vw;
-    padding: 0.75vw;
-    border-radius: 20%;
+    padding: 0.7vw;
+    border-radius: 30%;
     border: none;
     color: white;
     text-align: center;
@@ -32,7 +32,7 @@
   font-family: 'Trocchi', serif;
   font-weight: bold;
   font-size: 1.25vw;
-  margin: 3vh;
+  margin: 4vh;
   margin-top: 0vh;
 }
 .idea{
@@ -54,7 +54,8 @@
 }
 
 .board{
-  margin: 1.5% 0%;
+  margin: 1% 0%;
+  margin-bottom: 0%;
   width: 30vw;
   height: 30vh;
 }
@@ -69,6 +70,7 @@
 .right{
   height: 50vh;
   margin-left: 0%;
+  margin-bottom: 0%;
   overflow:hidden;
 }
 .innerLeft{
@@ -77,6 +79,7 @@
 }
 .innerRight{
   float: left;
+  margin-bottom: 0%;
 }
 .leftParagraf{
   margin: 1vh 0vw;
