@@ -24,11 +24,13 @@ showBoard = true, network
           state.board[0].length),state,canvasColor, boardId)
       }
     })
-    document.getElementById("showNet").addEventListener("click", function() {
+    document.getElementById("xorShowNet").addEventListener("click", function() {
       showBoard = showBoard? false:true
       if (showBoard) {
+        postReplace("xorShowNet", "Show network")
         xorDrawBoard(state.board, boardId, canvasColor)
       }else {
+        postReplace("xorShowNet", "Show board")
         paintNetwork(boardId, canvasColor, network)
       }
     })

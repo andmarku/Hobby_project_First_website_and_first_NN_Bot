@@ -48,18 +48,19 @@
       </div>
       <div class="left">
         <div class="innerLeft">
-          <p> <button class="button selfButton" id="r3SelfShowNet"> Show network/board</button> </p>
-          <p> <button class="button selfButton" id="r3SelfTrain"> Train AI</button> <p>
-          <p> <button class="button selfButton" id="r3SelfTest"> Test AI</button> </p>
-          <p class="text self" id="r3SelfAi"> </p>
+          <p class="leftParagraf"> <button class="button leftButton selfButton" id="r3SelfShowNet"> Show network</button> </p>
+          <p class="leftParagraf"> <button class="button leftButton selfButton" id="r3SelfTrain"> Train AI</button> </p>
+          <p class="leftParagraf"> <button class="button leftButton selfButton" id="r3SelfTest"> Test AI</button> </p>
+          <p class="leftParagraf"> <button class="button leftButton selfButton" id="r3SelfSees"> What the Ai sees</button> </p>
+          <p class="leftParagraf" class="text self" id="r3SelfAi"> </p>
          </div>
       </div>
       <div class="right">
         <div class="innerRight">
-          <p class="parButton">
-            <button class="button selfButton" id="r3SelfNewGame"> New game</button>
-            <button class="button selfButton" id="r3SelfRandomMove"> Random move</button>
-            <button class="button selfButton" id="r3SelfAiMove"> AI move</button>
+          <p class="parButton" id="selfGameButtons">
+            <button class="button centerButton centerButton selfButton" id="r3SelfNewGame"> New game</button>
+            <button class="button centerButton selfButton" id="r3SelfRandomMove"> Random move</button>
+            <button class="button centerButton selfButton" id="r3SelfAiMove"> AI move</button>
           </p>
           <canvas class="board" id="r3SelfBoard"></canvas>
           <p class="text self" id="r3SelfRes"> </p>
@@ -80,18 +81,19 @@
       </div>
       <div class="left">
          <div class="innerLeft">
-           <p> <button class="button complButton" id="r3ComplShowNet"> Show network/board</button></p>
-           <p> <button class="button complButton" id="r3ComplTrain"> Train AI</button></p>
-           <p> <button class="button complButton" id="r3ComplTest"> Test AI</button> </p>
-           <p class="text compl" id="r3ComplAi"> </p>
+           <p class="leftParagraf"> <button class="button leftButton complButton" id="r3ComplShowNet"> Show network</button></p>
+           <p class="leftParagraf"> <button class="button leftButton complButton" id="r3ComplTrain"> Train AI</button></p>
+           <p class="leftParagraf"> <button class="button leftButton complButton" id="r3ComplTest"> Test AI</button> </p>
+           <p class="leftParagraf"> <button class="button leftButton complButton" id="r3ComplSees"> What the Ai sees</button> </p>
+           <p class="leftParagraf" class="text compl" id="r3ComplAi"> </p>
          </div>
       </div>
        <div class="right">
          <div class="innerRight">
-           <p class="parButton">
-             <button class="button complButton" id="r3ComplNewGame"> New game</button>
-             <button class="button complButton" id="r3ComplRandomMove"> Random move</button>
-             <button class="button complButton" id="r3ComplAiMove"> AI move</button>
+           <p class="parButton" id="complGameButtons">
+             <button class="button centerButton complButton" id="r3ComplNewGame"> New game</button>
+             <button class="button centerButton complButton" id="r3ComplRandomMove"> Random move</button>
+             <button class="button centerButton complButton" id="r3ComplAiMove"> AI move</button>
            </p>
            <canvas class="board" id="r3ComplBoard"></canvas>
            <p class="text compl" id="r3ComplRes"> </p>
@@ -128,7 +130,7 @@
         <button class="button buttonXor" id="xorEvaluate"> Evaluate</button>
         <button class="button buttonXor" id="xorTestAi"> Test AI</button>
         <button class="button buttonXor" id="xorTrainAi"> Train AI</button>
-        <button class="button buttonXor" id="showNet"> Show network/board</button>
+        <button class="button buttonXor" id="xorShowNet"> Show network</button>
       </p>
       <p class="text xor" id="r3xorItr"> </p>
       <p class="text xor" id="xorPost"> </p>

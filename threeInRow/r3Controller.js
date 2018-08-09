@@ -13,11 +13,16 @@ if(isBoardShown){
   r3OnlineGame(state, slot, boardId, postWinnerElement, canvasColor)
 }}
 
-function r3ShowNet(isBoardShown, state, boardId, canvasColor, network) {
+function r3ShowNet(isBoardShown, state, boardId, canvasColor, network, buttonId,
+  pButtonId) {
 isBoardShown = isBoardShown? false:true
 if (isBoardShown) {
+  showElement(pButtonId)
+  postReplace(buttonId, "Show network")
   r3DrawBoard(state.board, boardId, canvasColor)
 }else {
+  hideElement(pButtonId)
+  postReplace(buttonId, "Show board")
   paintNetwork(boardId, canvasColor, network)
 }
 return isBoardShown

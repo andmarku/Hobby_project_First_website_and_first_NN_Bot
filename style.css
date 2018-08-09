@@ -4,8 +4,7 @@
 
 .button {
     font-size: 1.25vw;
-    padding: 1vw;
-    margin: 0% 0%;
+    padding: 0.75vw;
     border-radius: 20%;
     border: none;
     color: white;
@@ -15,6 +14,12 @@
     cursor: pointer;
 }
 
+.centerButton{
+  margin: 1vh 0%;
+}
+.leftButton{
+  width: 100%
+}
 .h1{
   font-family: 'Trocchi', serif;
   font-size: 3.5vw;
@@ -27,9 +32,12 @@
   font-family: 'Trocchi', serif;
   font-weight: bold;
   font-size: 1.25vw;
+  margin: 3vh;
+  margin-top: 0vh;
 }
 .idea{
   margin: 1% 0%;
+  margin-top: 0%;
   display: inline-block;
   max-width: 50vw;
   word-wrap: break-word;
@@ -38,8 +46,8 @@
 }
 
 .div{
-  border: 1.5vw solid #0ff;
-  margin: 10%;
+  border: 0.75vw solid #0ff;
+  margin: 7.5%;
   padding: 0% 1%;
   text-align: center;
   border-radius: 15%
@@ -52,23 +60,27 @@
 }
 
 .left{
-  margin: 0vh 3.25vw;
+  margin: 0vh 5.25vw;
   width: 15vw;
+  height: 50vh;
   float: left;
+  overflow:hidden;
+}
+.right{
+  height: 50vh;
+  margin-left: 0%;
   overflow:hidden;
 }
 .innerLeft{
   float: right;
   width: 10vw;
 }
-.right{
-  margin-left: 0%;
-  overflow:hidden;
-}
 .innerRight{
   float: left;
 }
-
+.leftParagraf{
+  margin: 1vh 0vw;
+}
 .parSubtitle{
   margin: 1vw;
   font-family: 'Trocchi', serif;

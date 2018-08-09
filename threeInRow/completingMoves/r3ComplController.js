@@ -29,7 +29,8 @@ addEventListener("load", () => {
       event.clientX, event.clientY)
   })
   document.getElementById("r3ComplShowNet").addEventListener("click", function(){
-    isBoardShown = r3ShowNet(isBoardShown, state, boardId, canvasColor, network)
+    isBoardShown = r3ShowNet(isBoardShown, state, boardId, canvasColor, network,
+      buttonId = "r3ComplShowNet", pButtonId = "complGameButtons")
   })
 })
 }

@@ -80,3 +80,11 @@ function postUnder(elementName, text) {
 function postReplace(elementName, text) {
   document.getElementById(elementName).innerHTML = text;
 }
+
+function hideElement(elementName) {
+  document.getElementById(elementName).style.display = "none";
+}
+
+function showElement(elementName) {
+  document.getElementById(elementName).style.display = "block";
+}

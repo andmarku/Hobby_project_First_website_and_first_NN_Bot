@@ -32,7 +32,8 @@ addEventListener("load", () => {
       event.clientX, event.clientY)
   })
   document.getElementById("r3SelfShowNet").addEventListener("click", function(){
-    isBoardShown = r3ShowNet(isBoardShown, state, boardId, canvasColor, network)
+    isBoardShown = r3ShowNet(isBoardShown, state, boardId, canvasColor, network,
+      buttonId = "r3SelfShowNet", pButtonId = "selfGameButtons")
   })
 })
 }
