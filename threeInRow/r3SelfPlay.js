@@ -1,11 +1,12 @@
 
-function r3SelfPlay(itr) {
-	let iterations = 50, learningRate = 0.1
+function r3SelfPlay(network, iterations) {
+	learningRate = 0.1
+	console.log("In selfplay trainer");
 	console.log("Training");
 
-	for (let i = 0; i < itr/iterations; i++) {
+	for (let i = 0; i < iterations; i++) {
 		state = r3NewGame()
-		while( r3Game(state, r3AiMove(state)) == 0){}
+		while( r3Game(state, r3AiMove(network, state)) == 0){}
 
 		// If the game ended in draw, play against random instead
 		if( state.winner == 2){
@@ -13,15 +14,15 @@ function r3SelfPlay(itr) {
 			state = r3NewGame()
 			do{
 				r3Game(state, randSlot(state.board))
-				if( r3Game(state, r3AiMove(state)) == 2){}
+				if( r3Game(state, r3AiMove(network, state)) == 2){}
 			}	while ( state.winner == 2){}
 		}
 
 		match = createDatasetFromGameLog(state.log)
-		aiTrainer(myR3Network, learningRate, iterations, match)
+		aiTrainer(network, learningRate, itr = 1, match)
 	}
 	// Clear the last game from the memory
-	state = r3NewGame()
+	state = r3NewGame() // TODO needed?
   console.log("Training completed");
 }
 

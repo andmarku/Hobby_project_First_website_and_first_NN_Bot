@@ -22,6 +22,89 @@ function paintNetwork(canvasName, canvasColor, network) {
     networkIntoBoard(network), canvasColor)
 }
 
+function paintNetworkVision(canvasName, canvasColor, network, funColoring) {
+  let canvas = document.getElementById(canvasName),
+      layOutOfNeuronOnCanvas = layoutOfNeuron(network),
+      boards = vision(network)
+  paintCanvas(canvas, canvasColor);
+  drawGrid(canvas, strokeColor = 'rgb(255, 255, 255)' /* white */, columns
+      = layOutOfNeuronOnCanvas.columns, rows =  layOutOfNeuronOnCanvas.rows)
+  drawVision(canvas, boards, funColoring)
+}
+
+function paintWeights(canvasName, network, funColoring) {
+  let gray = rgb(169,169,169)
+  let canvas = document.getElementById(canvasName),
+
+  // drawLine(canvas, strokeColor = gray, start, end)
+}
+
+function drawVision(canvas, boards, funColoring) {
+  let height, width, board, brickProp, index = 0
+  for (var i = 1; i <= rows; i++) {
+    height = i * canvas.height / rows
+    for (var j = 1; j <= columns; j++) {
+      width = j * canvas.width / columns
+      start = { xPos: (j-1)*canvas.width / columns,
+                yPos: (i-1)*canvas.height / rows}
+      board = boards[index++]
+      brickProp = calcBrickProperties(board.length, board[0].length, canvas.width
+        / columns, canvas.height / rows) //TODO calc to many times
+      drawBricksGeneral(canvas, brickProp, board, funColoring, start)
+    }
+  }
+}
+
+function drawBricks(canvas, brickProp, board, funColoring) { // Cannot i use something like startPos = startPos || {0, 0}?
+  let startPos = {xPos: 0,
+                  yPos: 0}
+  drawBricksGeneral(canvas, brickProp, board, funColoring, startPos)
+}
+
+function drawBricksGeneral(canvas, brickProp, board, funColoring, startPos) { //TODO refactor?
+  /* Defining the center of the upper left brick */
+  let xPos = startPos.xPos + brickProp.radius + brickProp.xPadding,
+  yPos = startPos.yPos + brickProp.radius + brickProp.yPadding
+  board.map(column => {
+    column.map(element =>{
+      drawCircle(canvas, funColoring(element), brickProp.radius, xPos, yPos)
+      yPos += 2*brickProp.radius + brickProp.yPadding
+    })
+    xPos += 2*brickProp.radius + brickProp.xPadding
+    yPos = startPos.yPos + brickProp.radius + brickProp.yPadding
+  })
+}
+
+function drawGrid(canvas, strokeColor, columns, rows) {
+  let height = 0, width = 0, start, end
+  // Need one less line than rows, also need to start at one in order to divide
+  for (var i = 1; i < rows; i++) {
+    height = i * canvas.height / rows
+    start = { xPos: 0,
+              yPos: height}
+    end = { xPos: canvas.width,
+            yPos: height}
+    drawLine(canvas, strokeColor, start, end)
+  }
+  for (var j = 1; j < columns; j++) {
+    width = j * canvas.width / columns
+    start = { xPos: width,
+              yPos: 0}
+    end = { xPos: width,
+            yPos: canvas.height}
+    drawLine(canvas, strokeColor, start, end)
+  }
+}
+
+function drawLine(canvas, strokeColor, start, end) {
+  let context = canvas.getContext("2d")
+  context.strokeStyle = strokeColor
+  context.beginPath();
+  context.moveTo(start.xPos, start.yPos);
+  context.lineTo(end.xPos, end.yPos);
+  context.stroke();
+}
+
 function drawNode(canvas, nodeProp, board, canvasColor) {
   let yPos, xPos = nodeProp.radius + nodeProp.xPadding // x-pos of 1 node
   board.map(column => {
@@ -39,20 +122,6 @@ function drawNode(canvas, nodeProp, board, canvasColor) {
   })
 }
 
-function drawBricks(canvas, brickProp, board, funColoring) {
-  /* Defining the center of the upper left brick */
-  let xPos = brickProp.radius + brickProp.xPadding
-  let yPos = brickProp.radius + brickProp.yPadding
-  /* Painting each brick */
-  board.map(column => {
-    column.map(element =>{
-      drawCircle(canvas, funColoring(element), brickProp.radius, xPos, yPos)
-      yPos += 2*brickProp.radius + brickProp.yPadding
-    })
-    xPos += 2*brickProp.radius + brickProp.xPadding
-    yPos = brickProp.radius + brickProp.yPadding
-  })
-}
 
 function drawCircle(canvas, color, radius, xPos, yPos) {
   let context = canvas.getContext("2d")
@@ -64,10 +133,16 @@ function drawCircle(canvas, color, radius, xPos, yPos) {
 
 function getBrickProperties(boardId, numberOfColumns, numberOfRows) {
   let canvas = document.getElementById(boardId),
-    diameter = ( canvas.height / (numberOfRows + 1) > canvas.width / (numberOfColumns + 1))?
-        canvas.width / (numberOfColumns + 1) : canvas.height / (numberOfRows + 1),
-    xPadding = (canvas.width - numberOfColumns * diameter) / (numberOfColumns + 1),
-    yPadding = (canvas.height - numberOfRows * diameter) / (numberOfRows + 1)
+      height = canvas.height,
+      width = canvas.width
+  return calcBrickProperties(numberOfColumns, numberOfRows, width, height)
+}
+
+function calcBrickProperties(numberOfColumns, numberOfRows, width, height) { // TODO Duplication
+  let diameter = ( height / (numberOfRows + 1) > width / (numberOfColumns + 1))?
+        width / (numberOfColumns + 1) : height / (numberOfRows + 1),
+    xPadding = (width - numberOfColumns * diameter) / (numberOfColumns + 1),
+    yPadding = (height - numberOfRows * diameter) / (numberOfRows + 1)
   return {radius : diameter/2, xPadding : xPadding, yPadding : yPadding }
 }
 

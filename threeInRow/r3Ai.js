@@ -1,16 +1,21 @@
 
 function selfNetwork() {
-	return createSmallNetwork(numInputlayer=9,numHiddenLayer=16,numOutputLayer=9)
+	return createSmallNetwork(numInputlayer=9,numHiddenLayer=9,numOutputLayer=9)
 }
+
+var net
 
 function complNetwork() {
-	return createSmallNetwork(numInputlayer=9,numHiddenLayer=16,numOutputLayer=9)
+	net = createSmallNetwork(numInputlayer=9,numHiddenLayer=9,numOutputLayer=9)
+	return net
 }
 
-function r3TrainAi(network, iterations) {
+function r3TrainerRandom(network, iterations) {
+	console.log("In random trainer");
 	console.log("Creating dataset");
 	// Create a smaller dataset than iterations, so that the network can do each more that once
   let dataset = r3RandDataSet(size = 1 + Math.round(iterations/3))
+	console.log(dataset);
 	console.log("Training");
 	aiTrainer(network, learningRate = 0.1, iterations, dataset)
   console.log("Training completed");
@@ -18,6 +23,7 @@ function r3TrainAi(network, iterations) {
 
 
 function r3RandDataSet(size) {
+	size = 10
 	let lastMove, almostWonBoard, correctAnswer, dataset = [], res = 0, tempBoard,
 	 	randomSlot, datapoint
 	for (let i = 0; i < size; i++) {
@@ -73,14 +79,17 @@ function findR3AiMove(state, board, aiOutput) {
 }
 
 function r3TestAI(network, iterations) {
-	let wonGames = 0, draws = 0, losses
+	let wonGames = 0, draws = 0, losses, turn
 	for (let i = 0; i < iterations; i++) {
 		state = r3NewGame()
+		turn = Math.round(Math.random())
 		do{
-			r3Game(state, randSlot(state.board))
-			if( state.winner == 0){
+			if(turn == 1){
+				r3Game(state, randSlot(state.board))
+			}	else{
 				r3AiMove(network, state)
 			}
+			turn = turn == 1? 0 : 1
 		}	while ( state.winner == 0){}
 		if (state.winner == -1) {
 			wonGames++
