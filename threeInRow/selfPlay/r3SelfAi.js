@@ -3,7 +3,6 @@ function r3SelfPlay(network, iterations) {
 	learningRate = 0.1
 	console.log("In selfplay trainer");
 	console.log("Training");
-
 	for (let i = 0; i < iterations; i++) {
 		state = r3NewGame()
 		while( r3Game(state, r3AiMove(network, state)) == 0){}
@@ -18,31 +17,30 @@ function r3SelfPlay(network, iterations) {
 			}	while ( state.winner == 2){}
 		}
 
-		match = createDatasetFromGameLog(state.log, state.board)
+		match = createDatasetFromGameLog(state)
 		aiTrainer(network, learningRate, itr = 1, match)
 	}
   console.log("Training completed");
 }
 
 function createDatasetFromGameLog(state) {
-		// what is  state??? Also, remove boardIntoArr
-
+	// console.log(state);
 	let almostWonBoard, correctAnswer, dataset = [], counter = 1
-	for (let i = state.gameLog.length -1; i  >  -1; i--) {
+	for (let i = state.log.length-1; i  >  -1; i--) {
 
 		// Remove the last move
-		almostWonBoard = updateBoard(state.board, column = state.gameLog[i].column,
-			row = state.gameLog[i].row, value=0)
+		almostWonBoard = updateBoard(state.board, column = state.log[i].column,
+			row = state.log[i].row, value=0)
 
 		// Save only the winners moves
 		if (counter % 2 == 1 ){
 			// Create the correct answer
 			correctAnswer = createBoard(almostWonBoard.length, almostWonBoard[0].length)
-			correctAnswer = updateBoard(correctAnswer, state.gameLog[i].column,
-				state.gameLog[i].row, value = state.gameLog[i].player)
+			correctAnswer = updateBoard(correctAnswer, state.log[i].column,
+				state.log[i].row, value = state.log[i].player)
 
 			// Create input from board
-			almostWonBoard = prepareInputForAI(almostWonBoard, state.gameLog[i].player)
+			almostWonBoard = prepareInputForAI(almostWonBoard, state.log[i].player)
 
 			// Turn into array
 			correctAnswer =  boardToArray(correctAnswer);
@@ -58,7 +56,6 @@ function createDatasetFromGameLog(state) {
 	}
 	return dataset
 }
-
 
 function learnTestBoard(network) {
 	let inputBoard, outputBoard, datapoint = []

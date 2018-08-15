@@ -4,7 +4,7 @@ function selfNetwork() {
 }
 
 function complNetwork() {
-	return createPerceptron(numInputlayer=18,numHiddenLayer=[9],numOutputLayer=9)
+	return createPerceptron(numInputlayer=18,numHiddenLayer=[18,18,18],numOutputLayer=9)
 }
 
 function r3AiMove(network, state) {
@@ -27,7 +27,7 @@ function findR3AiMove(state, aiOutput) {
 			}
 		}
 	}
-	return slotChosen // TODO: slotChosen may be undefined
+	return slotChosen
 }
 
 function prepareInputForAI(board, turn) {
@@ -51,26 +51,31 @@ function prepareInputForAI(board, turn) {
 }
 
 function r3TestAI(network, iterations) {
-	let wonGames = 0, draws = 0, losses, turn
+	let wonGames = 0, draws = 0, losses=0, turn, result, aiIsPlayer
 	for (let i = 0; i < iterations; i++) {
 		state = r3NewGame()
-		turn = Math.round(Math.random())
-		//turn = 0
+		aiIsPlayer = Math.round(Math.random()) * 2 - 1 // either +1 or -1
+		turn = 1
 		do{
-			if(turn == 1){
+			if(turn == aiIsPlayer){ // Ai turn
+				r3Game(state,r3AiMove(network, state))
+			}	else{ // Random turn
 				r3Game(state, randSlot(state.board))
-			}	else{
-				r3AiMove(network, state)
 			}
-			turn = turn == 1? 0 : 1
+			turn = state.nextTurn
 		}	while ( state.winner == 0){}
-		if (state.winner == 1) {
+		result = state.winner * aiIsPlayer //if ai is -1 then -1 is win, else -1 is loss etc
+		if (result == 1) {
 			wonGames++
-		}else if (state.winner == 2) {
+		}else if (result == 2 || result == -2) {
 			draws++
+		}else if(result == -1){
+			losses++
+		}else{
+			console.log("line 74 in r3Ai");
 		}
 	}
 	return { 	won: wonGames,
-		lost: iterations - draws - wonGames,
+		lost: losses,
 		drawed: draws }
 	}

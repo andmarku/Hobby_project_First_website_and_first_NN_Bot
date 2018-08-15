@@ -1,7 +1,19 @@
-2   ny post där det går att göra en egen databas och sedan gå igenom den - viktiga är att det blir ett verktyg för att undersöka och konstruera databasen.
-
-vill också att tidigare bilder sparas så att det är lätt att jämföra - kan vara en meny med fram och bakåt.
-
+**vision**
 vad är felet med AI vision??
 
+gradskala
+
+välj vilket lager som ska visas
+
+**network**
+
+zooma in på Network - större bild
+
+välj en nod i nätverket
+
+** allmänt **
 refactorera controller mm så att canvas skickas runt som ett object. vill byta ut canvas istället för att måla över.
+
+uppdatera complentary moves
+
+det konstiga med vad som visas (log behövs...?)

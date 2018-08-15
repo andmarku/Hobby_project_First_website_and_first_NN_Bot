@@ -20,7 +20,7 @@ function r3RandDataSet(size) {
 		// Retrieve the winning move
 		lastMove = state.lastMove
 		// Get the board without the winning move
-		 almostWonBoard = updateBoard(state.board, column = lastMove.column,
+		almostWonBoard = updateBoard(state.board, column = lastMove.column,
 		 			row = lastMove.row, value=0)
 		// Switching the board for the ai
 		almostWonBoard = prepareInputForAI(almostWonBoard, state.winner)
@@ -29,7 +29,6 @@ function r3RandDataSet(size) {
 		correctAnswer = updateBoard(correctAnswer, lastMove.column, lastMove.row, value = 1)
 		// Turn into array
 		correctAnswer =  boardToArray(correctAnswer);
-		almostWonBoard = boardToArray(state.board);
 		// Store in the right format
 		datapoint = {	input: almostWonBoard,
 									output: correctAnswer	}

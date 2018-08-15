@@ -30,8 +30,7 @@ addEventListener("load", () => {
     postResAiTest(textElement, iterations, stats)
   })
   document.getElementById("r3SelfTrain").addEventListener("click", function() {
-    // itrTrained = r3Train(textElement, network, newIterations = 5000, itrTrained, r3SelfPlay)
-    itrTrained = r3Train(textElement, network, newIterations = 5000, itrTrained, learnTestBoard)
+    itrTrained = r3Train(textElement, network, newIterations = 500, itrTrained, r3SelfPlay)
   })
 
   /* Canvas listeners*/
