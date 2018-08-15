@@ -1,5 +1,6 @@
-{let boardId = "xorBoard", state, canvasColor = "rgb(34,139,34)", itrTrained = 0,
-showBoard = true, network
+{let  boardId = "xorBoard", state, canvasColor = "rgb(34,139,34)", itrTrained = 0,
+      showBoard = true
+var network
 
   addEventListener("load", () => {
     state = xorNewGame(canvasColor, boardId), network = createXorNetwork()
@@ -11,6 +12,7 @@ showBoard = true, network
     })
     document.getElementById("xorTestAi").addEventListener("click", function() {
       let aiAnswer = testXorAi(network, boardToArray(state.board))
+      console.log(network);
       postAiResult(aiAnswer)
     })
     document.getElementById("xorEvaluate").addEventListener("click", function () {

@@ -70,7 +70,6 @@ function generateRandomGameDataSet(size) {
 
 function generateLastMoveAiMove(board) {
 	var aiOutput = myC4Network.activate(boardToArray(board))
-	console.log(findAiWantedColumn(aiOutput));
 	return findAiWantedColumn(aiOutput)
 }
 

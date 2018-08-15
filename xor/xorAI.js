@@ -1,6 +1,6 @@
 
 function createXorNetwork() {
-	return createSmallNetwork(numInputlayer=2,numHiddenLayer=2,numOutputLayer=1)
+	return createPerceptron(numInputlayer=2,numHiddenLayer=[2],numOutputLayer=1)
 }
 
 function generateXorCases() {

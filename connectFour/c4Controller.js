@@ -6,15 +6,10 @@ addEventListener("load", () => {
 
   document.getElementById("randomMove").addEventListener("click", makeRandomAiMove)
 
-  // document.getElementById("aiMove").addEventListener("click", makeLastMoveAiMove)
-
-  // document.getElementById("trainAi").addEventListener("click", trainMyNet)
-
   document.getElementById('c4Board').addEventListener("click", function(){
     let newBoard = getC4BoardState()
     let x = event.clientX
     let y = event.clientY
     playOnlineGame(columnClicked('c4Board',x,y, newBoard.length, newBoard[0].length))
-    }
-  )
+  })
 })

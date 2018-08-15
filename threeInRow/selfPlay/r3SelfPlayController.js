@@ -20,9 +20,9 @@ addEventListener("load", () => {
   })
   document.getElementById(boardId).addEventListener("click", function(){
     if(whatIsShown == "board")
-    r3ColumnClicked(whatIsShown, state, boardId, canvasColor, textElement,
-      event.clientX, event.clientY)
-    })
+      r3ColumnClicked(whatIsShown, state, boardId, canvasColor, textElement,
+        event.clientX, event.clientY)
+  })
 
   /* Network listeners*/
   document.getElementById("r3SelfTest").addEventListener("click", function() {
@@ -30,7 +30,8 @@ addEventListener("load", () => {
     postResAiTest(textElement, iterations, stats)
   })
   document.getElementById("r3SelfTrain").addEventListener("click", function() {
-    itrTrained = r3Train(textElement, network, newIterations = 5000, itrTrained, r3SelfPlay)
+    // itrTrained = r3Train(textElement, network, newIterations = 5000, itrTrained, r3SelfPlay)
+    itrTrained = r3Train(textElement, network, newIterations = 5000, itrTrained, learnTestBoard)
   })
 
   /* Canvas listeners*/

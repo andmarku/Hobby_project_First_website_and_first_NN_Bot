@@ -1,7 +1,6 @@
 2   ny post där det går att göra en egen databas och sedan gå igenom den - viktiga är att det blir ett verktyg för att undersöka och konstruera databasen.
 
-1   ordna så att vikternas storlek visas på Show net, så att det går att se om ngt händer.
-      vill också att tidigare bilder sparas så att det är lätt att jämföra - kan vara en meny med fram och bakåt.
+vill också att tidigare bilder sparas så att det är lätt att jämföra - kan vara en meny med fram och bakåt.
 
 vad är felet med AI vision??
 

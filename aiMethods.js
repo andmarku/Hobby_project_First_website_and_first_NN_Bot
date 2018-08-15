@@ -1,26 +1,44 @@
-function createSmallNetwork(numInputlayer, numInHiddenLayer, numOutputLayer) {
+function createPerceptron(numInputlayer, arrWithNumInEachHiddenLayer, numOutputLayer) {
 	let inputLayer = new window.synaptic.Layer(numInputlayer),
-		hiddenLayer = new window.synaptic.Layer(numInHiddenLayer),
-		outputLayer = new window.synaptic.Layer(numOutputLayer)
-	inputLayer.project(hiddenLayer)
-	hiddenLayer.project(outputLayer)
+			outputLayer = new window.synaptic.Layer(numOutputLayer),
+			hiddenLayer = []
+
+	if (arrWithNumInEachHiddenLayer.length == 0) {
+		inputLayer.project(outputLayer)
+		return new window.synaptic.Network({
+			input: inputLayer,
+			output: outputLayer
+		})
+	}
+
+	arrWithNumInEachHiddenLayer.map(numInLayer => {
+		hiddenLayer.push(new window.synaptic.Layer(numInLayer))
+	})
+
+	inputLayer.project(hiddenLayer[0])
+	for (var i = 0; i < hiddenLayer.length-1; i++) {
+		hiddenLayer[i].project(hiddenLayer[i+1])
+	}
+	hiddenLayer[hiddenLayer.length-1].project(outputLayer)
+
 	return new window.synaptic.Network({
 		input: inputLayer,
-		hidden: [hiddenLayer],
+		hidden: hiddenLayer,
 		output: outputLayer
 	})
 }
 
-function aiTrainer(network, learningRate, iterations, dataset) {
-	let randomCase
-  for (let i = 0; i < iterations; i++) {
-		// Choose a random game to train with
-		randomCase = Math.floor(Math.random()*dataset.length)
 
-		// Train the network
-		network.activate(dataset[randomCase].input)
-		network.propagate(learningRate, dataset[randomCase].output)
-  }
+function aiTrainer(network,learningRate, iterations,dataset) {
+	let trainer = new window.synaptic.Trainer(network)
+	trainer.train(dataset, {
+		rate: learningRate,
+		iterations: iterations,
+		error: .005,
+		shuffle: true,
+		log: 1000,
+		cost: window.synaptic.Trainer.cost.CROSS_ENTROPY
+	})
 }
 
 function getNetworkProperties(canvasName, network) {
@@ -35,24 +53,25 @@ function getNodeForwardConnections(node) {
  let 	id = node.id,
  			inputs = node.connections.inputs,
  			projections = node.connections.projected
-
-			// input.from gives neuron
-			// projections.to gives neuron
-			// ... .weight gives weight
 }
-function networkIntoBoard(network) { //TODO not general enogh
+function networkIntoBoard(network) {
   // Create a board to send to draw
-  input = [], hidden = [], output = []
-  network.neurons().map( node => {
-    if (node.layer == "input") {
-      input.push(1)
-    }else if (node.layer == 0) {
-      hidden.push(1)
-    } else {
-      output.push(1)
-    }
-  })
-  return [input, hidden, output]
+  let input = [], hidden = [], output = [], thisLayer
+
+	network.layers.input.list.map(node =>{
+		input.push(node)
+	})
+	network.layers.hidden.map(layer =>{
+		thisLayer = []
+		layer.list.map(node => {
+			thisLayer.push(node)
+		})
+		hidden.push(thisLayer)
+	})
+	network.layers.output.list.map(node =>{
+		output.push(node)
+	})
+  return [input].concat(hidden,[output])
 }
 
 function maxNodesInLayer(network) {

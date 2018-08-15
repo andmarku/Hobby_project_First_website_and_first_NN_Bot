@@ -16,10 +16,13 @@ function paintCanvas(canvas, color) {
 }
 
 function paintNetwork(canvasName, canvasColor, network) {
-  let canvas = document.getElementById(canvasName)
-  paintCanvas(canvas, 'rgb(255, 255, 255)'); // white
+  let canvas = document.getElementById(canvasName),
+      netAsBoard = getCanvasNodeProp(canvas, getNetworkProperties(canvasName, network),
+                      networkIntoBoard(network), canvasColor)
+  paintCanvas(canvas, 'rgb(255, 255, 255)' /* white*/);
+  drawWeights(canvas, netAsBoard)
   drawNode(canvas, getNetworkProperties(canvasName, network),
-    networkIntoBoard(network), canvasColor)
+    netAsBoard, canvasColor)
 }
 
 function paintNetworkVision(canvasName, canvasColor, network, funColoring) {
@@ -32,11 +35,24 @@ function paintNetworkVision(canvasName, canvasColor, network, funColoring) {
   drawVision(canvas, boards, funColoring)
 }
 
-function paintWeights(canvasName, network, funColoring) {
-  let gray = rgb(169,169,169)
-  let canvas = document.getElementById(canvasName),
-
-  // drawLine(canvas, strokeColor = gray, start, end)
+function drawWeights(canvas, netAsBoard) {
+  let red = "rgb(144,0,0)", blue = "rbg(0,0,0)",
+      weight, outputNode, connections
+  for (var i = 0; i < netAsBoard.length -1; i++) {
+    netAsBoard[i].map(inputNode =>{
+      connections = Object.values(inputNode.node.connections.projected)
+        for (var j = 0; j < netAsBoard[i+1].length; j++) {
+          outputNode = netAsBoard[i+1][j]
+          // making sure that the connection can be seen
+          weight = Math.abs(connections[j].weight) < 0.3? 0.3 : connections[j].weight
+          if (weight > 0) {
+            drawLine(canvas, strokeColor = blue, lineWidth = weight, inputNode, outputNode)
+          }else {
+            drawLine(canvas, strokeColor = red, lineWidth = weight, inputNode, outputNode)
+          }
+        }
+    })
+  }
 }
 
 function drawVision(canvas, boards, funColoring) {
@@ -84,7 +100,7 @@ function drawGrid(canvas, strokeColor, columns, rows) {
               yPos: height}
     end = { xPos: canvas.width,
             yPos: height}
-    drawLine(canvas, strokeColor, start, end)
+    drawLine(canvas, strokeColor, lineWidth = 1, start, end)// TODO magic numbers
   }
   for (var j = 1; j < columns; j++) {
     width = j * canvas.width / columns
@@ -92,34 +108,49 @@ function drawGrid(canvas, strokeColor, columns, rows) {
               yPos: 0}
     end = { xPos: width,
             yPos: canvas.height}
-    drawLine(canvas, strokeColor, start, end)
+    drawLine(canvas, strokeColor, lineWidth = 1, start, end)// TODO magic numbers
   }
 }
 
-function drawLine(canvas, strokeColor, start, end) {
+function drawLine(canvas, strokeColor, lineWidth, start, end) {
   let context = canvas.getContext("2d")
   context.strokeStyle = strokeColor
+  context.lineWidth = lineWidth
   context.beginPath();
   context.moveTo(start.xPos, start.yPos);
   context.lineTo(end.xPos, end.yPos);
   context.stroke();
 }
 
-function drawNode(canvas, nodeProp, board, canvasColor) {
-  let yPos, xPos = nodeProp.radius + nodeProp.xPadding // x-pos of 1 node
+function drawNode(canvas, nodeProp, netAsBoard, canvasColor) {
+  netAsBoard.map(column => {
+    column.map(element =>{
+      drawCircle(canvas, canvasColor, nodeProp.radius, element.xPos, element.yPos)
+    })
+  })
+}
+
+function getCanvasNodeProp(canvas, nodeProp, board, canvasColor) {
+  let yPos, xPos = nodeProp.radius + nodeProp.xPadding, // x-pos of 1 node
+      newBoard = [], newColumn, newNode
   board.map(column => {
+    newColumn = []
     // y-pos of 1 node in each layer (differs for each layer)
     yPos = nodeProp.radius + (canvas.height -  column.length*(nodeProp.radius*2) -
       ( column.length-1)*nodeProp.yBetweenNodes) / 2
 
     column.map(element =>{
-      drawCircle(canvas, canvasColor, nodeProp.radius, xPos, yPos)
+      newColumn.push({node: element,
+                      xPos: xPos,
+                      yPos: yPos})
       // Space between the centers of two nodes
       yPos += 2*nodeProp.radius + nodeProp.yBetweenNodes
     })
     // Space between layers
     xPos += 2*nodeProp.radius + nodeProp.xPadding
+    newBoard.push(newColumn)
   })
+  return newBoard
 }
 
 

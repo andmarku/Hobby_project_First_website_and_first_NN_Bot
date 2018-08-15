@@ -1,8 +1,3 @@
-function convertBoardForAI(board, player) {
-  board = board.map(vector => vector.map (element => element =  element*player))
-  return board
-}
-
 function createBoard(numberOfColumns, numberOfRows) {
   let board = [], column = [], a = 0
   for (let j = 0; j < numberOfColumns; j++) {
