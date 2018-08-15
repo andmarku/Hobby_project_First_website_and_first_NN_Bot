@@ -1,12 +1,3 @@
-
-function selfNetwork() {
-	return createPerceptron(numInputlayer=18,numHiddenLayer=[48,18],numOutputLayer=9)
-}
-
-function complNetwork() {
-	return createPerceptron(numInputlayer=18,numHiddenLayer=[18,18,18],numOutputLayer=9)
-}
-
 function r3AiMove(network, state) {
 	let arrayBoard = prepareInputForAI(state.board, state.nextTurn),
 			output = network.activate(arrayBoard),

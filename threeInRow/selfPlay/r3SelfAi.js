@@ -1,3 +1,6 @@
+function selfNetwork() {
+	return createPerceptron(numInputlayer=18,numHiddenLayer=[18,8,8,8,9],numOutputLayer=9)
+}
 
 function r3SelfPlay(network, iterations) {
 	learningRate = 0.1

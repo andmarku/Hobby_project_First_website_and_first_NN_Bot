@@ -1,5 +1,5 @@
 {let itrTrained = 0, state, boardId = "r3SelfBoard", whatIsShown = "board",
-  textElement = "r3SelfText", canvasColor = "rgb(94,65,47)", network
+  textElement = "r3SelfText", canvasColor = "rgba(94,65,47,1)", network
 
 addEventListener("load", () => {
   state = r3StartOnlineGame(boardId, canvasColor)
@@ -43,7 +43,7 @@ addEventListener("load", () => {
       pButtonId = "selfGameButtons")
   })
   document.getElementById("r3SelfShowVision").addEventListener("click", function(){
-    whatIsShown = r3ShowVision(whatIsShown, state, boardId, canvasColor, network,
+    whatIsShown = r3ShowVision(whatIsShown, state, boardId, color = "rgba(94,65,47,1)", network,
       pButtonId = "selfGameButtons")
   })
 })

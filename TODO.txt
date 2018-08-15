@@ -1,19 +1,9 @@
-**vision**
-vad är felet med AI vision??
-
-gradskala
-
-välj vilket lager som ska visas
-
-**network**
-
-zooma in på Network - större bild
-
-välj en nod i nätverket
 
 ** allmänt **
-refactorera controller mm så att canvas skickas runt som ett object. vill byta ut canvas istället för att måla över.
-
-uppdatera complentary moves
-
-det konstiga med vad som visas (log behövs...?)
+- snygga till koden
+  -- c4!!
+  -- ALLMÄNT
+- krashar när self tränas länge
+- alla TODOs
+- förklarande text på hemsidan - kanske dela upp i fler delar
+- snygga till med kommentarer (OBS nästan sist)

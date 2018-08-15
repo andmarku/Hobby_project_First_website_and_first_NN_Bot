@@ -28,7 +28,8 @@ function paintNetwork(canvasName, canvasColor, network) {
 function paintNetworkVision(canvasName, canvasColor, network, funColoring) {
   let canvas = document.getElementById(canvasName),
       layOutOfNeuronOnCanvas = layoutOfNeuron(network),
-      boards = vision(network)
+      boards = maxInput(network)
+
   paintCanvas(canvas, canvasColor);
   drawGrid(canvas, strokeColor = 'rgb(255, 255, 255)' /* white */, columns
       = layOutOfNeuronOnCanvas.columns, rows =  layOutOfNeuronOnCanvas.rows)
@@ -44,7 +45,7 @@ function drawWeights(canvas, netAsBoard) {
         for (var j = 0; j < netAsBoard[i+1].length; j++) {
           outputNode = netAsBoard[i+1][j]
           // making sure that the connection can be seen
-          weight = Math.abs(connections[j].weight) < 0.3? 0.3 : connections[j].weight
+          weight = Math.abs(connections[j].weight) < 0.3? Math.sign(connections[j].weight) * 0.3 : connections[j].weight
           if (weight > 0) {
             drawLine(canvas, strokeColor = blue, lineWidth = weight, inputNode, outputNode)
           }else {
@@ -65,7 +66,7 @@ function drawVision(canvas, boards, funColoring) {
                 yPos: (i-1)*canvas.height / rows}
       board = boards[index++]
       brickProp = calcBrickProperties(board.length, board[0].length, canvas.width
-        / columns, canvas.height / rows) //TODO calc to many times
+        / columns, canvas.height / rows)
       drawBricksGeneral(canvas, brickProp, board, funColoring, start)
     }
   }

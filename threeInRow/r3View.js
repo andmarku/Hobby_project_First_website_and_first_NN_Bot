@@ -17,18 +17,20 @@ function postResAiTest(element, iterations, stats) {
 }
 
 function r3PaintNetworkVision(boardId, canvasColor, network) {
-  paintNetworkVision(boardId, canvasColor, network,brickColoring)
+  paintNetworkVision(boardId, canvasColor, network, brickColoring)
 }
 
 function brickColoring(element) {
+  let seeThrough = Math.abs(element)
   if( element == 0) {
     color = "white"
-  } else if (element==1) {
+  } else if (element > 0) {
     // yellow
-    color = "rgb(244,199,62)"
+    color = "rgba(244,199,62," + seeThrough + ")"
   } else {
     // red
-    color = "rgb(242,122,64)"
+    color = "rgba(242,122,64," + seeThrough + ")"
+
   }
   return color
 }

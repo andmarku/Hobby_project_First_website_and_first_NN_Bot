@@ -39,11 +39,8 @@ addEventListener("load", () => {
       pButtonId = "complGameButtons")
   })
   document.getElementById("r3ComplShowNet").addEventListener("click", function(){
+    console.log(network);
     whatIsShown = r3ShowNet(whatIsShown, state, boardId, canvasColor, network,
-      pButtonId = "complGameButtons")
-  })
-  document.getElementById("r3ComplShowVision").addEventListener("click", function(){
-    whatIsShown = r3ShowVision(whatIsShown, state, boardId, canvasColor, network,
       pButtonId = "complGameButtons")
   })
 })

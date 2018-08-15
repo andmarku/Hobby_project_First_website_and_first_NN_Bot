@@ -28,7 +28,6 @@ function createPerceptron(numInputlayer, arrWithNumInEachHiddenLayer, numOutputL
 	})
 }
 
-
 function aiTrainer(network,learningRate, iterations,dataset) {
 	let trainer = new window.synaptic.Trainer(network)
 	trainer.train(dataset, {
@@ -49,11 +48,13 @@ function getNetworkProperties(canvasName, network) {
 				    xPadding : brickProp.xPadding,
 				    yBetweenNodes : brickProp.yPadding }
 }
+
 function getNodeForwardConnections(node) {
  let 	id = node.id,
  			inputs = node.connections.inputs,
  			projections = node.connections.projected
 }
+
 function networkIntoBoard(network) {
   // Create a board to send to draw
   let input = [], hidden = [], output = [], thisLayer
@@ -85,14 +86,10 @@ function maxNodesInLayer(network) {
   return maxInLayer
 }
 
-function vision(network) {
-	return maxInput(network.layers.hidden[0])
-}
-
 function layoutOfNeuron(network) {
-	let maxIn = vision(network)
+	let maxIn = maxInput(network)
 	return { 	columns: maxIn.length/calcGreatestDivider(maxIn),
-															rows:calcGreatestDivider(maxIn) }
+						rows:calcGreatestDivider(maxIn) }
 }
 
 function calcGreatestDivider(maxIn) {
@@ -107,12 +104,14 @@ function calcGreatestDivider(maxIn) {
 	return greatestDivider
 }
 
-function maxInput(layer) {
-	let boards = [], newBoardAsArray, neuronsInLayer = reformatLayerStats(layer), x
+function maxInput(network) {
+	let x, newBoardAsArray, boards = [],
+			layer = network.layers.output,
+			neuronsInLayer = reformatLayerStats(layer)
 	neuronsInLayer.map(neuron => {
 		newBoardAsArray = []
 		neuron.inputConnections.map( conn => {
-			x = Math.round(conn.weight/neuron.sqrtOfSumOfSquaredWeights)
+			x = conn.weight/neuron.sqrtOfSumOfSquaredWeights
 			newBoardAsArray.push(x)
 		})
 		boards.push(arrayToBoard(createBoard(3,3), newBoardAsArray))
