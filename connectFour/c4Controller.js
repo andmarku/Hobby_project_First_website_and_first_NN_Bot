@@ -1,15 +1,18 @@
-
+{let state
 addEventListener("load", () => {
-  startOnlineGame()
+  state = c4StartOnlineGame()
 
-  document.getElementById("newGame").addEventListener("click", startOnlineGame)
+  document.getElementById("newGame").addEventListener("click", () => {
+    state = c4StartOnlineGame()
+  })
 
-  document.getElementById("randomMove").addEventListener("click", makeRandomAiMove)
+  document.getElementById("randomMove").addEventListener("click",  () => {
+    c4RandomMove(state)
+  })
 
   document.getElementById('c4Board').addEventListener("click", function(){
-    let newBoard = getC4BoardState()
-    let x = event.clientX
-    let y = event.clientY
-    playOnlineGame(columnClicked('c4Board',x,y, newBoard.length, newBoard[0].length))
+    c4PlayOnlineGame(state, columnClicked('c4Board', event.clientX, event.clientY,
+      state.board.length, state.board[0].length))
   })
 })
+}

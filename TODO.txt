@@ -6,4 +6,5 @@
 - krashar när self tränas länge
 - alla TODOs
 - förklarande text på hemsidan - kanske dela upp i fler delar
-- snygga till med kommentarer (OBS nästan sist)
+- kolla att saker funkar på mobilen
+- snygga till med kommentarer (OBS sist)

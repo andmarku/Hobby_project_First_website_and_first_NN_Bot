@@ -1,5 +1,5 @@
 
-function postWinner(winner) {
+function c4PostWinner(winner) {
   let text =  winner == -1 ? "Game drawn" : "Player " + winner + " has won"
   postUnder(element =  "c4Post", text)
 }
