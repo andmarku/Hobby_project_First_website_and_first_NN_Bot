@@ -40,11 +40,18 @@
       <div>
         <h1 class="h1 self" id="h1Self">Bot 2: self play</h1>
         <p class="text self idea">
-          The idea is to train the AI using games it plays against itself. After
-          a game has been played, the board state before each of the winners moves
-          is set as input to train on, with the choosen move as the correct output.
-          When the AI plays a draw against itself, it instead plays a game against
-          a random opponent.
+          The idea is to train the AI using games it plays against an opponent making
+          random moves. After a game has been played, the board state before each of
+          the winners moves is set as input to train on, with the choosen move as the
+          correct output. When the AI plays a draw against itself, it instead plays a
+          game against a random opponent.
+          <br></br>
+          The Show AI vision-button visualizes for each node in the second layer
+          (i.e. the first hidden layer) what the board would look if the
+          should be maximally activated. The more faded a brick is, the less important
+          it is for that node. The idea behind the visualization is that if the second
+          layer had learned something specific about the board, e.g. if each node
+          corresponded to a line on the board, it would show up here.
         </p>
       </div>
       <div class="left">
@@ -78,8 +85,11 @@
         <p class="text compl idea">
           In order to train the AI a database of games is created by letting two
           random bots play as many games as needed, keeping only those with a
-          desicive winner. The board states before the winning moves are then of
-          set as input to train on, with the winning move as the correct output.
+          desicive winner. For each of these games, the board state just before
+          the winning move is saved together with the winning move, creating
+          a database of puzzles on which the network can be trained.
+          <br></br>
+          The gain from training is however usually very small.
         </p>
       </div>
       <div class="left">

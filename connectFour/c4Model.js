@@ -1,3 +1,4 @@
+
 function c4NewGame() {
   return {  board: createBoard(numberOfColumns = 7, numberOfRows = 6),
             nextTurn: 1,
@@ -5,28 +6,28 @@ function c4NewGame() {
             wonGame: false }
 }
 
-function c4StartOnlineGame() {
+function c4StartOnlineGame(canvasName) {
   let state = c4NewGame()
-  c4DrawBoard(state.board)
+  c4paintBoard(state.board, canvasName)
   return state
 }
 
-function c4PlayOnlineGame(state, column) {
+function c4PlayOnlineGame(state, column, canvasName, textElement) {
   c4GamePlay(state, column)
   if( state.winner != 0 && !state.wonGame){
     state.wonGame = true
-    c4PostWinner(state.winner)
+    c4PostWinner(state.winner, textElement)
   }
-  c4DrawBoard(state.board)
+  c4paintBoard(state.board, canvasName)
 }
 
 function c4GamePlay(state, column) {
   if (nonFullColumns(state.board).length == 0) {
-    state.winner = -1
+    state.winner = -1 // Symbolizes draw
     return
   }
   let row = getEmptyRowInColumn(state.board, column)
-  /* If the row isn't full, make a move */
+  // If the row isn't full, make a move, else ignore it
   if(row != -1){
     state.board = updateBoard(state.board, column, row, state.nextTurn)
     lastMove = [column, row]
@@ -36,6 +37,6 @@ function c4GamePlay(state, column) {
   }
 }
 
-function c4RandomMove(state) {
-  c4PlayOnlineGame(state, randColumn(nonFullColumns(state.board)))
+function c4RandomMove(state,  canvasName, textElement) {
+  c4PlayOnlineGame(state, randColumn(nonFullColumns(state.board)), canvasName, textElement)
 }

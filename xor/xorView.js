@@ -11,18 +11,16 @@ function postAiResult(isCorrect) {
   postReplace(element = "xorPost", text)
 }
 
-function xorDrawBoard(board, canvasName, canvasColor) {
+function xorpaintBoard(board, canvasName, canvasColor) {
   // Define the color of the bricks for this game
   function brickColoring(element) {
-    if( element == 0) {
+    if( element == 0)
       color = "white"
-    } else {
-      // yellowish
-      color = "rgb(273,200,71)"
-    }
+    else
+      color = "rgb(273,200,71)" // yellowish
     return color
   }
-  drawBoard(board, canvasName, canvasColor, brickColoring)
+  paintBoard(board, canvasName, canvasColor, brickColoring)
 }
 
 function xorShowNet(canvasName, canvasColor, network) {

@@ -1,65 +1,63 @@
 function selfNetwork() {
-	return createPerceptron(numInputlayer=18,numHiddenLayer=[18,8,8,8,9],numOutputLayer=9)
+	return createPerceptron(numInputlayer=9,numHiddenLayer=[16],numOutputLayer=9)
 }
 
 function r3SelfPlay(network, iterations) {
-	learningRate = 0.1
-	console.log("In selfplay trainer");
-	console.log("Training");
+	let learningRate = 0.3, aiIsPlayer
 	for (let i = 0; i < iterations; i++) {
-		state = r3NewGame()
-		while( r3Game(state, r3AiMove(network, state)) == 0){}
-
-		// If the game ended in draw, play against random instead
-		if( state.winner == 2){
-			console.log("in draw ");
+		do{
 			state = r3NewGame()
+			aiIsPlayer = Math.round(Math.random()) * 2 - 1 // either +1 or -1
+			turn = 1
 			do{
-				r3Game(state, randSlot(state.board))
-				if( r3Game(state, r3AiMove(network, state)) == 2){}
-			}	while ( state.winner == 2){}
+				if(turn == aiIsPlayer) // Ai turn
+					r3Game(state, r3AiMove(network, state))
+				else // Random turn
+					r3Game(state, randSlot(state.board))
+				turn = state.nextTurn
+			}	while ( state.winner == 0)
+
+			// Play another game until the ai has won the game
+		}	while ( state.winner == 2 || state.winner*aiIsPlayer == -1 )
+
+		// Ensure that the winner always is player one
+		if (state.winner == -1) {
+			state.board = state.board.map(col =>	col.map( element => element * -1 ))
+			state.nextTurn = state.nextTurn * -1
+			state.winner = state.winner * -1
 		}
 
 		match = createDatasetFromGameLog(state)
 		aiTrainer(network, learningRate, itr = 1, match)
 	}
-  console.log("Training completed");
 }
 
 function createDatasetFromGameLog(state) {
-	// console.log(state);
-	let almostWonBoard, correctAnswer, dataset = [], counter = 1
+	let almostWonBoard, correctAnswer, dataset = []
 	for (let i = state.log.length-1; i  >  -1; i--) {
-
-		// Remove the last move
+		// Remove the last move from the board
 		almostWonBoard = updateBoard(state.board, column = state.log[i].column,
 			row = state.log[i].row, value=0)
 
 		// Save only the winners moves
-		if (counter % 2 == 1 ){
+		if (state.log[i].player == state.winner){
+			// Create input from board
+			almostWonBoard = prepareInputForAi(almostWonBoard, state.log[i].player)
+
 			// Create the correct answer
 			correctAnswer = createBoard(almostWonBoard.length, almostWonBoard[0].length)
 			correctAnswer = updateBoard(correctAnswer, state.log[i].column,
 				state.log[i].row, value = state.log[i].player)
-
-			// Create input from board
-			almostWonBoard = prepareInputForAI(almostWonBoard, state.log[i].player)
-
-			// Turn into array
 			correctAnswer =  boardToArray(correctAnswer);
 
-			// Store in the right format
-			datapoint = {
-				input: almostWonBoard,
-				output: correctAnswer
-			}
-			dataset.push(datapoint)
+			dataset.push({ 	input: almostWonBoard,
+											output: correctAnswer	})
 		}
-		counter++
 	}
 	return dataset
 }
 
+/* A data set for testing the network training*/
 function learnTestBoard(network) {
 	let inputBoard, outputBoard, datapoint = []
 
@@ -69,7 +67,7 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
 	inputBoard = [	[-1, 0, 0],
@@ -78,7 +76,7 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
 	inputBoard = [	[0, 0, 0],
@@ -87,7 +85,7 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
 	inputBoard = [	[0, 0, 0],
@@ -96,7 +94,7 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
 	inputBoard = [	[0, 0, 0],
@@ -105,7 +103,7 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
 	inputBoard = [	[0, 0, 0],
@@ -114,7 +112,7 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
 	inputBoard = [	[0, 0, -1],
@@ -123,7 +121,7 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
 	inputBoard = [	[0, -1, 0],
@@ -132,138 +130,9 @@ function learnTestBoard(network) {
 	outputBoard = [	[0, 0, 0],
 									[0, 1, 0],
 									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
+	datapoint.push(	{	input: prepareInputForAiWithDoubleInput(inputBoard, turn=1),
 										output: boardToArray(outputBoard)	}	)
 
-	//////////////////////////////// second move ////////////////////////////
-
-	inputBoard = [	[-1, 0, 0],
-									[0, 1, 0],
-									[0, 0, 0]	]
-	outputBoard = [	[0, 0, 0],
-									[0, 0, 0],
-									[1, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, 0],
-									[-1, 1, 0],
-									[0, 0, 0]	]
-	outputBoard = [	[0, 0, 1],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, 0],
-									[0, 1, 0],
-									[-1, 0, 0]	]
-	outputBoard = [	[1, 0, 0],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, 0],
-									[0, 1, 0],
-									[0, -1, 0]	]
-	outputBoard = [	[1, 0, 0],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, 0],
-									[0, 1, 0],
-									[0, 0, -1]	]
-	outputBoard = [	[0, 0, 1],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, -1],
-									[0, 1, 0],
-									[0, 0, 0]	]
-	outputBoard = [	[1, 0, 0],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, -1, 0],
-									[0, 1, 0],
-									[0, 0, 0]	]
-	outputBoard = [	[0, 0, 0],
-									[0, 0, 0],
-									[1, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	////////////////////////////// third move ////////////////////////////
-
-	inputBoard = [	[1, 0, 0],
-									[0, 1, 0],
-									[0, 0, 0]	]
-	outputBoard = [	[0, 0, 0],
-									[0, 0, 0],
-									[0, 0, 1]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, 0],
-									[1, 1, 0],
-									[0, 0, 0]	]
-	outputBoard = [	[0, 0, 0],
-									[0, 0, 1],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, 0],
-									[0, 1, 0],
-									[1, 0, 0]	]
-	outputBoard = [	[0, 0, 1],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, 0],
-									[0, 1, 0],
-									[0, 1, 0]	]
-	outputBoard = [	[0, 1, 0],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, 0, -1],
-									[0, 1, 0],
-									[0, -1, 1]	]
-	outputBoard = [	[1, 0, 0],
-									[0, 0, 0],
-									[0, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[0, -1, 1],
-									[0, 1, -1],
-									[0, 0, 0]	]
-	outputBoard = [	[0, 0, 0],
-									[0, 0, 0],
-									[1, 0, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
-
-	inputBoard = [	[-1, 1, 0],
-									[-1, 1, 0],
-									[0, 0, 0]	]
-	outputBoard = [	[0, 0, 0],
-									[0, 0, 0],
-									[0, 1, 0]	]
-	datapoint.push(	{	input: prepareInputForAI(inputBoard, turn=1),
-										output: boardToArray(outputBoard)	}	)
 
 	aiTrainer(network, learningRate = 0.2, iterations = 500, datapoint)
   console.log("Special training completed");

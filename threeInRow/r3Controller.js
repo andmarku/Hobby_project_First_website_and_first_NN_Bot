@@ -5,31 +5,27 @@ function r3Train(element, network, newIterations, itrTrained, traningFunction) {
   return itrTrained
 }
 
-function r3ColumnClicked(isBoardShown, state, boardId, canvasColor, postWinnerElement, x, y) {
-  if(isBoardShown){
-    let board = state.board
-    let slot = {  column: columnClicked(boardId,x,y, board.length, board[0].length),
-                  row: rowClicked(boardId,x,y, board.length, board[0].length) }
-    r3OnlineGame(state, slot, boardId, postWinnerElement, canvasColor)
-}}
-
-function r3ShowBoard(isBoardShown, state, boardId, canvasColor, network, buttonToShowId ) {
-  whatIsShown = "board"
-  showElement(buttonToShowId)
-  r3DrawBoard(state.board, boardId, canvasColor)
-  return whatIsShown
+function r3ColumnClicked(state, boardId, canvasColor, postWinnerElement, x, y) {
+  let board = state.board,
+      slot = {  column: columnClicked(boardId,x,y, board.length, board[0].length),
+                row: rowClicked(boardId,x,y, board.length, board[0].length) }
+  r3OnlineGame(state, slot, boardId, postWinnerElement, canvasColor)
 }
 
-function r3ShowNet(isBoardShown, state, boardId, canvasColor, network, buttonToHideId ) {
-  whatIsShown = "net"
+function r3ShowBoard(state, boardId, canvasColor, network, buttonToShowId ) {
+  showElement(buttonToShowId)
+  r3paintBoard(state.board, boardId, canvasColor)
+  return whatIsShown = "board"
+}
+
+function r3ShowNet(state, boardId, canvasColor, network, buttonToHideId ) {
   hideElement(buttonToHideId)
   paintNetwork(boardId, canvasColor, network)
-  return whatIsShown
+  return whatIsShown = "net"
 }
 
-function r3ShowVision(isBoardShown, state, boardId, canvasColor, network, buttonToHideId) {
-    whatIsShown = "vision"
+function r3ShowVision(state, boardId, canvasColor, network, buttonToHideId) {
     hideElement(buttonToHideId)
     r3PaintNetworkVision(boardId, canvasColor, network)
-    return whatIsShown
-  }
+    return whatIsShown = "vision"
+}

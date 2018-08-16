@@ -1,42 +1,42 @@
 function complNetwork() {
-	return createPerceptron(numInputlayer=18,numHiddenLayer=[18,18,18],numOutputLayer=9)
+	return createPerceptron(numInputlayer=18,numHiddenLayer=[16,8],numOutputLayer=9)
 }
 
 function r3TrainerRandom(network, iterations) {
-	console.log("Creating dataset");
 	// Create a smaller dataset than iterations, so that the network can do each more that once
-  let dataset = r3RandDataSet(size = 1 + Math.round(iterations/3))
-	console.log("Training");
+  let dataset = r3RandDataSet(size = 1 + Math.round(size=300))
 	aiTrainer(network, learningRate = 0.1, iterations, dataset)
-  console.log("Training completed");
 }
 
 function r3RandDataSet(size) {
-	size = 10
-	let lastMove, almostWonBoard, correctAnswer, dataset = [], res = 0, tempBoard,
-	 	randomSlot, datapoint
+	let lastMove, almostWonBoard, correctAnswer, dataset = [], datapoint
 	for (let i = 0; i < size; i++) {
-		do{ // Generate a random game
+		// Generate a random game, which doesnt end in draw
+		do{
 			state = r3NewGame()
-			while( r3Game(state, randSlot(state.board)) == 0){
-			}
+			// Play until the game is finished
+			while( r3Game(state, randSlot(state.board)) == 0){}
 		} while ( state.winner == 2)
 		// Retrieve the winning move
 		lastMove = state.lastMove
-		// Get the board without the winning move
+
+		// Remove the winning move from the board
 		almostWonBoard = updateBoard(state.board, column = lastMove.column,
 		 			row = lastMove.row, value=0)
-		// Switching the board for the ai
-		almostWonBoard = prepareInputForAI(almostWonBoard, state.winner)
-		// Create the correct answer
-		correctAnswer = createBoard(almostWonBoard.length, almostWonBoard[0].length)
+		// Set the Ai as player one on the input and create the input so that each
+		// side have designated input nodes
+		prepareInputForAi(almostWonBoard, state.nextTurn)
+		almostWonBoard = prepareInputForAiWithDoubleInput(almostWonBoard, state.winner)
+
+		// Create the a correct answer
+		correctAnswer = createBoard(state.board.length, state.board[0].length)
 		correctAnswer = updateBoard(correctAnswer, lastMove.column, lastMove.row, value = 1)
-		// Turn into array
-		correctAnswer =  boardToArray(correctAnswer);
-		// Store in the right format
-		datapoint = {	input: almostWonBoard,
+		correctAnswer = boardToArray(correctAnswer);
+		correctAnswer = incorporateTakenSlotsIntoOutput(inputArr = almostWonBoard,
+			outputArr = correctAnswer)
+
+		dataset[i] = {	input: almostWonBoard,
 									output: correctAnswer	}
-		dataset[i] = datapoint
 	}
 	return dataset
 }

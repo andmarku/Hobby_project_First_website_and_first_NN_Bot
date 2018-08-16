@@ -1,6 +1,4 @@
-.parButton {
-  margin: 0px;
-}
+.parButton { margin: 0px; }
 
 .button {
     font-size: 1.25vw;
@@ -14,12 +12,10 @@
     cursor: pointer;
 }
 
-.centerButton{
-  margin: 1vh 0%;
-}
-.leftButton{
-  width: 100%
-}
+.centerButton{ margin: 1vh 0%; }
+
+.leftButton{ width: 100% }
+
 .h1{
   font-family: 'Trocchi', serif;
   font-size: 3.5vw;
@@ -35,6 +31,7 @@
   margin: 4vh;
   margin-top: 0vh;
 }
+
 .idea{
   margin: 1% 0%;
   margin-top: 0%;
@@ -67,59 +64,68 @@
   float: left;
   overflow:hidden;
 }
+
 .right{
   height: 50vh;
   margin-left: 0%;
   margin-bottom: 0%;
   overflow:hidden;
 }
+
 .innerLeft{
   float: right;
   width: 10vw;
 }
+
 .innerRight{
   float: left;
   margin-bottom: 0%;
 }
+
 .leftParagraf{
   margin: 1vh 0vw;
 }
+
 .parSubtitle{
   margin: 1vw;
   font-family: 'Trocchi', serif;
   font-size: 2.75vw;
 }
 
-/* --------------
-Three in row - self play */
+/* Three in row - self play */
 .self {
   color: rgb(94,65,47);
   border-color: rgb(94,65,47)
 }
+
 .selfButton {background-color: rgb(94,65,47);}
-/* --------------
-Three in row - winning move */
+/* Three in row - completing move */
 .compl {
   color: rgb(128,0,128);
   border-color: rgb(128,0,128)
 }
+
 .complButton {background-color: rgb(128,0,128);}
-/* --------------
-Three in row - game */
+/* Three in row - game */
 .r3 {
   color: rgb(145,0,0);
   border-color: rgb(145,0,0)
 }
+
 .r3Button {background-color: rgb(145,0,0);}
-/* ----------------------
- Connect connectFour */
+/* Connect connectFour */
 #connectFour{border-color: rgb(134,146,176)}
+
 #h1C4 {color: rgb(134,146,176);}
+
 .buttonC4 {background-color: rgb(77,88,119);}
+
 #c4Post {color: rgb(134,146,176);}
-/* -----------
- XOR */
+/* XOR */
 .xor{ color: rgb(43,172,43); /* Forest green */ }
+
 #xor{border-color: rgb(49,200,49) /* Forest green */}
+
 #h1Xor {color: rgb(43,172,43); /* Forest green */}
+
 .buttonXor {background-color: rgb(43,172,43); /* Forest green */}

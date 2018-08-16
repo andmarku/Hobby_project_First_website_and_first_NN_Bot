@@ -1,4 +1,3 @@
-
 function createXorNetwork() {
 	return createPerceptron(numInputlayer=2,numHiddenLayer=[2],numOutputLayer=1)
 }
