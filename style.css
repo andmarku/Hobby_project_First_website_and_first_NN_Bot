@@ -1,5 +1,16 @@
-.parButton { margin: 0px; }
+/* Outer div of each section*/
+.div{
+  border: 0.75vw solid #0ff;
+  margin: 5vh 5vw;
+  padding: 3vh 3vw;
+  text-align: center;
+  border-radius: 6vmax;
+}
 
+/* Paragraf with buttons */
+.parButton { margin: 0vmax; }
+
+/* Buttons */
 .button {
     font-size: 1.25vw;
     padding: 0.7vw;
@@ -12,86 +23,85 @@
     cursor: pointer;
 }
 
-.centerButton{ margin: 1vh 0%; }
+/* Buttons above the boards that can be hidden  */
+.centerButton{ margin: 1vh 0vw; }
 
-.leftButton{ width: 100% }
+/* Buttons to the left of the boards */
+.leftButton{ width: 10vw }
 
+/* Title for each section */
 .h1{
   font-family: 'Trocchi', serif;
-  font-size: 3.5vw;
+  font-size: 3.75vmax;
   font-weight: bold;
-  line-height: 40%;
-  margin: 3% 4%;
+  line-height: 4vh;
+  margin: 3vh 4vw;
 }
 
+/* All text */
 .text{
   font-family: 'Trocchi', serif;
   font-weight: bold;
   font-size: 1.25vw;
-  margin: 4vh;
-  margin-top: 0vh;
+  margin: 1vh;
 }
 
+/* Text describing the section */
 .idea{
-  margin: 1% 0%;
-  margin-top: 0%;
   display: inline-block;
   max-width: 50vw;
   word-wrap: break-word;
-  overflow: hidden;
+  overflow: ellipsis;
   text-align: justify;
+  margin: 5vh 0vh
 }
 
-.div{
-  border: 0.75vw solid #0ff;
-  margin: 7.5%;
-  padding: 0% 1%;
-  text-align: center;
-  border-radius: 15%
-}
-
+/* The canvas */
 .board{
-  margin: 1% 0%;
-  margin-bottom: 0%;
+  margin: 1vh 0vw;
+  margin-bottom: 0vh;
   width: 30vw;
   height: 30vh;
 }
 
+/* Div left of the board */
 .left{
   margin: 0vh 5.25vw;
   width: 15vw;
-  height: 50vh;
+  height: 40vh;
   float: left;
   overflow:hidden;
 }
 
+/* Div containing the canvas etc */
 .right{
-  height: 50vh;
-  margin-left: 0%;
-  margin-bottom: 0%;
+  height: 40vh;
+  margin-left: 0vw;
+  margin-bottom: 0vh;
   overflow:hidden;
 }
 
+/* Inner div to the left of the canvas */
 .innerLeft{
   float: right;
   width: 10vw;
 }
 
+/* Inner div containing the canvas */
 .innerRight{
   float: left;
-  margin-bottom: 0%;
+  margin-bottom: 0vh;
 }
 
+/* Paragrafs inside the innnerLeft div, containing buttons */
 .leftParagraf{
   margin: 1vh 0vw;
 }
 
-.parSubtitle{
-  margin: 1vw;
-  font-family: 'Trocchi', serif;
-  font-size: 2.75vw;
-}
 
+/* - - - - - - - - - - - -
+Section specific (mostly coloring)
+- - - - - - - - - - - - -  */
 /* Three in row - self play */
 .self {
   color: rgb(94,65,47);

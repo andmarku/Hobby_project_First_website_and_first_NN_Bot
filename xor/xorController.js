@@ -12,7 +12,6 @@
 
     document.getElementById("xorTestAi").addEventListener("click", function() {
       let aiAnswer = testXorAi(network, boardToArray(state.board))
-      console.log(network);
       postAiResult(aiAnswer)
     })
 
@@ -31,6 +30,7 @@
     })
 
     document.getElementById("xorShowNet").addEventListener("click", function() {
+      console.log(network); // needed for unknown reason, otherwise the network doesn't update  
       showBoard = showBoard? false:true
       if (showBoard) {
         postReplace("xorShowNet", "Show network")
