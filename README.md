@@ -1,5 +1,5 @@
-# myFirstAiBotWebsite
-This is a website which I designed in order to try on using neural networks as the basis for a Tic-tac-toe (three in row) bot. The site is also my first try using with js, html and css.
+# myFirstWebsiteAndMyFirstAiBot
+This is a website which I designed for fun and to learn a little about javascript, html, and css. On the website, I test using neural networks for a (not very good) Tic-tac-toe bot and test some simple visualisations for insights into the current state of the bots neural network.
 
 # General info
 The current address for the website is: https://mysterious-lowlands-23508.herokuapp.com/ .
